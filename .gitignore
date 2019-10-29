@@ -142,6 +142,7 @@ logs/
 # IntelliJ IDEA
 *.iml
 .idea/
+.mvn/wrapper
 mvnw
 mvnw.cmd
-.mvn/wrapper
+HELP.md
