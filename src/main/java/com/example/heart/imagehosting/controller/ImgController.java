@@ -51,6 +51,13 @@ public class ImgController {
     public JSONObject imgUpload(@RequestParam("multipartFiles") MultipartFile[] multipartFiles) {
         logger.info("开始进行图片上传");
 
+        //TODO 判空流程
+        //TODO 统一返回
+
+        //TODO 第一步：缓存到本地
+        //TODO 第二步：上传到sm.ms，收到响应报文，解析处理并保存到数据库
+        //TODO 第三步：清理本地缓存，响应前端
+
         JSONObject jsonObject = new JSONObject(2);
         if (multipartFiles == null || multipartFiles.length == 0) {
             logger.error("没有上传任何图片");
