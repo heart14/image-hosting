@@ -144,3 +144,4 @@ logs/
 .idea/
 mvnw
 mvnw.cmd
+.mvn/wrapper
