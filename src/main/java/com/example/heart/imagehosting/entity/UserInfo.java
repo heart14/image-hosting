@@ -13,7 +13,7 @@ public class UserInfo {
     @Id
     private String userId;
 
-    @Column(name = "userStatus")
+    @Column(name = "user_status")
     private Integer userStatus;
 
     @Column(name = "nickname")
@@ -22,22 +22,22 @@ public class UserInfo {
     @Column(name = "avatar")
     private String avatar;
 
-    @Column(name = "loginIp")
+    @Column(name = "login_ip")
     private String loginIp;
 
-    @Column(name = "lastLoginIp")
+    @Column(name = "last_login_ip")
     private String lastLoginIp;
 
-    @Column(name = "loginTime")
+    @Column(name = "login_time")
     private Date loginTime;
 
-    @Column(name = "lastLoginTime")
+    @Column(name = "last_login_time")
     private Date lastLoginTime;
 
-    @Column(name = "createTime")
+    @Column(name = "create_time")
     private Date createTime;
 
-    @Column(name = "updateTime")
+    @Column(name = "update_time")
     private Date updateTime;
 
     public String getUserId() {

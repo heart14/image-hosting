@@ -31,7 +31,7 @@ public class ImgHosting {
     @Column(name = "hash")
     private String hash;
 
-    @Column(name = "deleteUrl")
+    @Column(name = "delete_url")
     private String deleteUrl;
 
     @Column(name = "url")
@@ -46,24 +46,34 @@ public class ImgHosting {
     @Column(name = "status")
     private Integer status;
 
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private String userId;
 
-    @Column(name = "userIp")
+    @Column(name = "user_ip")
     private String userIp;
 
-    @Column(name = "createTime")
+    @Column(name = "page")
+    private String page;
+
+    @Column(name = "file_id")
+    private Integer fileId;
+
+    @Column(name = "request_id")
+    private String requestId;
+
+    @Column(name = "create_time")
     private Date createTime;
 
-    @Column(name = "updateTime")
+    @Column(name = "update_time")
     private Date updateTime;
+
 
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.id = id;
     }
 
     public String getFilename() {
@@ -71,7 +81,7 @@ public class ImgHosting {
     }
 
     public void setFilename(String filename) {
-        this.filename = filename == null ? null : filename.trim();
+        this.filename = filename;
     }
 
     public String getStorename() {
@@ -79,7 +89,7 @@ public class ImgHosting {
     }
 
     public void setStorename(String storename) {
-        this.storename = storename == null ? null : storename.trim();
+        this.storename = storename;
     }
 
     public String getSize() {
@@ -87,7 +97,7 @@ public class ImgHosting {
     }
 
     public void setSize(String size) {
-        this.size = size == null ? null : size.trim();
+        this.size = size;
     }
 
     public Integer getWidth() {
@@ -111,7 +121,7 @@ public class ImgHosting {
     }
 
     public void setHash(String hash) {
-        this.hash = hash == null ? null : hash.trim();
+        this.hash = hash;
     }
 
     public String getDeleteUrl() {
@@ -119,7 +129,7 @@ public class ImgHosting {
     }
 
     public void setDeleteUrl(String deleteUrl) {
-        this.deleteUrl = deleteUrl == null ? null : deleteUrl.trim();
+        this.deleteUrl = deleteUrl;
     }
 
     public String getUrl() {
@@ -127,7 +137,7 @@ public class ImgHosting {
     }
 
     public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+        this.url = url;
     }
 
     public String getPath() {
@@ -135,7 +145,7 @@ public class ImgHosting {
     }
 
     public void setPath(String path) {
-        this.path = path == null ? null : path.trim();
+        this.path = path;
     }
 
     public String getMsg() {
@@ -143,7 +153,7 @@ public class ImgHosting {
     }
 
     public void setMsg(String msg) {
-        this.msg = msg == null ? null : msg.trim();
+        this.msg = msg;
     }
 
     public Integer getStatus() {
@@ -159,7 +169,7 @@ public class ImgHosting {
     }
 
     public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+        this.userId = userId;
     }
 
     public String getUserIp() {
@@ -167,7 +177,31 @@ public class ImgHosting {
     }
 
     public void setUserIp(String userIp) {
-        this.userIp = userIp == null ? null : userIp.trim();
+        this.userIp = userIp;
+    }
+
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
+    }
+
+    public Integer getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(Integer fileId) {
+        this.fileId = fileId;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 
     public Date getCreateTime() {
@@ -203,6 +237,9 @@ public class ImgHosting {
                 ", status=" + status +
                 ", userId='" + userId + '\'' +
                 ", userIp='" + userIp + '\'' +
+                ", page='" + page + '\'' +
+                ", fileId=" + fileId +
+                ", requestId='" + requestId + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';

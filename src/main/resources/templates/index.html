@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>IMAGE-HOSTING</title>
+    <script th:src="@{/js/jquery-3.4.1.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.js}" type="text/javascript"></script>
+    <link th:href="@{/css/bootstrap.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-theme.css}" type="text/css" rel="stylesheet"/>
+    <style>
+        .container {
+            width: 80%;
+        }
+    </style>
+    <script>
+         function checkImage() {
+             var val = $("#multipartFiles").val();
+             if (val === null || val === undefined || val.length === 0) {
+                 return false;
+             }
+             return true;
+         }
+    </script>
+</head>
+<body>
+<div id="page-container" class="container">
+
+    <div class="jumbotron">
+        <h1>Hello, world!</h1>
+        <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
+            content or information.</p>
+
+        <form id="imgUpload" action="/image/upload" method="POST" enctype="multipart/form-data">
+            <input id="multipartFiles" name="multipartFiles" type="file" multiple>
+            <button class="btn btn-primary btn-lg" onclick="return checkImage()">UPLOAD</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
