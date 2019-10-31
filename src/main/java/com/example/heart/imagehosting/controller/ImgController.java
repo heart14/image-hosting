@@ -163,4 +163,9 @@ public class ImgController {
         logger.info("清理本地临时文件{}", delete ? "完毕" : "失败");
         return jsonObject;
     }
+
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    public List<ImgHosting> getImage() {
+        return imgService.findAllImgHosting();
+    }
 }
