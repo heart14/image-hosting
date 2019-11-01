@@ -6,7 +6,6 @@ import com.example.heart.imagehosting.service.ImageInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,19 +38,12 @@ public class ImageInfoServiceImpl implements ImageInfoService {
 
     @Override
     public ImageInfo findImageInfoById(String id) {
-        return imageInfoDao.findById(id).isPresent() ? imageInfoDao.findById(id).get() : null;
+        return imageInfoDao.findImageInfoById(id);
     }
 
     @Override
     public List<ImageInfo> findAllImageInfo() {
-        List<ImageInfo> list = new ArrayList<>();
-        Iterable<ImageInfo> imgHostings = imageInfoDao.findAll();
-        for (ImageInfo imageInfo : imgHostings) {
-            if (imageInfo.getStatus() == 1) {
-                list.add(imageInfo);
-            }
-        }
-        imageInfoDao.findAll();
-        return list;
+        return imageInfoDao.findAllByStatusAndUserId(1, "heartzz1");
+
     }
 }

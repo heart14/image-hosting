@@ -124,8 +124,7 @@ public class ImageController {
                 image.setUrl(url);
                 image.setPath(path);
                 image.setStatus(1);
-                image.setUserId("000000");
-//                image.setUserIp(ip);
+                image.setUserId("heartzz1");
                 image.setMsg(msg);
                 image.setPage(page);
                 image.setFileId(fileId);
@@ -166,6 +165,11 @@ public class ImageController {
 //        return jsonObject;
     }
 
+    /**
+     * 查询所有图片url
+     *
+     * @return
+     */
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public List<String> getAllImageInfo() {
 
