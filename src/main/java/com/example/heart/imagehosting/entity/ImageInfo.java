@@ -7,8 +7,8 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "IMG_HOSTING")
-public class ImgHosting {
+@Table(name = "IMAGE_INFO")
+public class ImageInfo {
 
     @Id
     private String id;
@@ -48,9 +48,6 @@ public class ImgHosting {
 
     @Column(name = "user_id")
     private String userId;
-
-    @Column(name = "user_ip")
-    private String userIp;
 
     @Column(name = "page")
     private String page;
@@ -172,14 +169,6 @@ public class ImgHosting {
         this.userId = userId;
     }
 
-    public String getUserIp() {
-        return userIp;
-    }
-
-    public void setUserIp(String userIp) {
-        this.userIp = userIp;
-    }
-
     public String getPage() {
         return page;
     }
@@ -222,7 +211,7 @@ public class ImgHosting {
 
     @Override
     public String toString() {
-        return "ImgHosting{" +
+        return "ImageInfo{" +
                 "id='" + id + '\'' +
                 ", filename='" + filename + '\'' +
                 ", storename='" + storename + '\'' +
@@ -236,7 +225,6 @@ public class ImgHosting {
                 ", msg='" + msg + '\'' +
                 ", status=" + status +
                 ", userId='" + userId + '\'' +
-                ", userIp='" + userIp + '\'' +
                 ", page='" + page + '\'' +
                 ", fileId=" + fileId +
                 ", requestId='" + requestId + '\'' +

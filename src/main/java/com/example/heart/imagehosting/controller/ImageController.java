@@ -1,8 +1,8 @@
 package com.example.heart.imagehosting.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.heart.imagehosting.entity.ImgHosting;
-import com.example.heart.imagehosting.service.ImgHostingService;
+import com.example.heart.imagehosting.entity.ImageInfo;
+import com.example.heart.imagehosting.service.ImageInfoService;
 import com.example.heart.imagehosting.utils.HttpUtils;
 import com.example.heart.imagehosting.utils.StringUtils;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * @ClassName: ImgController
+ * @ClassName: ImageController
  * @Description: TODO
  * @Author: jayhe
  * @Date: 2019/10/29 15:45
@@ -28,9 +28,9 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/image")
-public class ImgController {
+public class ImageController {
 
-    public static final Logger logger = LoggerFactory.getLogger(ImgController.class);
+    public static final Logger logger = LoggerFactory.getLogger(ImageController.class);
 
     @Value("${IMG_STORE_PATH}")
     String imgPath;
@@ -45,7 +45,7 @@ public class ImgController {
     String clearApiUrl;
 
     @Autowired
-    private ImgHostingService imgService;
+    private ImageInfoService imageInfoService;
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public void imgUpload(@RequestParam("multipartFiles") MultipartFile[] multipartFiles) {
@@ -95,7 +95,7 @@ public class ImgController {
         for (File tempfile : list) {
             resp = HttpUtils.doPostImage(uploadApiUrl, tempfile);
             Map<String, String> map = new HashMap<>();
-            ImgHosting image = new ImgHosting();
+            ImageInfo image = new ImageInfo();
             if (JSONObject.parseObject(resp).getBoolean("success") && "success".equals(JSONObject.parseObject(resp).getString("code"))) {
                 JSONObject respData = JSONObject.parseObject(JSONObject.parseObject(resp).getString("data"));
                 String filename = respData.getString("filename");
@@ -149,7 +149,7 @@ public class ImgController {
                 map.put("filename", tempfile.getName());
                 map.put("errMsg", errMsg);
             }
-            imgService.saveImgHosting(image);
+            imageInfoService.saveImageInfo(image);
             data.add(map);
         }
         jsonObject.put("msg", "图片上传完毕， 共" + list.size() + "， 失败" + failNum);
@@ -167,17 +167,17 @@ public class ImgController {
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public List<String> getImage() {
+    public List<String> getAllImageInfo() {
 
         List<String> list = new ArrayList<>();
 
-        List<ImgHosting> allImgHosting = imgService.findAllImgHosting();
-        if (allImgHosting == null || allImgHosting.size() == 0) {
+        List<ImageInfo> allImageInfo = imageInfoService.findAllImageInfo();
+        if (allImageInfo == null || allImageInfo.size() == 0) {
             logger.info("查询所有图片 :{}", list);
             return list;
         }
-        for (ImgHosting imgHosting : allImgHosting) {
-            list.add(imgHosting.getUrl());
+        for (ImageInfo imageInfo : allImageInfo) {
+            list.add(imageInfo.getUrl());
         }
 
         logger.info("查询所有图片 :{}", list);

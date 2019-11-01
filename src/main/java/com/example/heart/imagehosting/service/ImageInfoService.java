@@ -1,40 +1,40 @@
 package com.example.heart.imagehosting.service;
 
-import com.example.heart.imagehosting.entity.ImgHosting;
+import com.example.heart.imagehosting.entity.ImageInfo;
 
 import java.util.List;
 
 /**
- * @ClassName: ImgHostingService
+ * @ClassName: ImageInfoService
  * @Description: TODO
  * @Author: jayhe
  * @Date: 2019/10/29 15:20
  * @Version: v1.0
  */
-public interface ImgHostingService {
+public interface ImageInfoService {
 
     /**
      * 增
      *
-     * @param imgHosting
+     * @param imageInfo
      * @return
      */
-    ImgHosting saveImgHosting(ImgHosting imgHosting);
+    ImageInfo saveImageInfo(ImageInfo imageInfo);
 
     /**
      * 删
      *
      * @param id
      */
-    void removeImgHostingById(String id);
+    void removeImageInfoById(String id);
 
     /**
      * 改
      *
-     * @param imgHosting
+     * @param imageInfo
      * @return
      */
-    ImgHosting editImgHosting(ImgHosting imgHosting);
+    ImageInfo editImageInfo(ImageInfo imageInfo);
 
     /**
      * 查
@@ -42,12 +42,12 @@ public interface ImgHostingService {
      * @param id
      * @return
      */
-    ImgHosting findImgHostingById(String id);
+    ImageInfo findImageInfoById(String id);
 
     /**
      * 查
      *
      * @return
      */
-    List<ImgHosting> findAllImgHosting();
+    List<ImageInfo> findAllImageInfo();
 }
