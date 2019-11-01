@@ -48,7 +48,7 @@ public class ImgController {
     private ImgHostingService imgService;
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public JSONObject imgUpload(@RequestParam("multipartFiles") MultipartFile[] multipartFiles) {
+    public void imgUpload(@RequestParam("multipartFiles") MultipartFile[] multipartFiles) {
         logger.info("开始进行图片上传");
 
         //TODO 判空流程
@@ -63,7 +63,8 @@ public class ImgController {
             logger.error("没有上传任何图片");
             jsonObject.put("msg", "没有上传任何图片");
             jsonObject.put("data", new ArrayList<>());
-            return jsonObject;
+//            return jsonObject;
+            return;
         }
 
         List<File> list = new ArrayList<>();
@@ -138,6 +139,7 @@ public class ImgController {
                 failNum++;
                 String errMsg = JSONObject.parseObject(resp).getString("message");
 
+                image.setId(StringUtils.getUuid());
                 image.setFilename(tempfile.getName());
                 image.setStatus(0);
                 image.setMsg(errMsg);
@@ -161,11 +163,24 @@ public class ImgController {
             }
         }
         logger.info("清理本地临时文件{}", delete ? "完毕" : "失败");
-        return jsonObject;
+//        return jsonObject;
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public List<ImgHosting> getImage() {
-        return imgService.findAllImgHosting();
+    public List<String> getImage() {
+
+        List<String> list = new ArrayList<>();
+
+        List<ImgHosting> allImgHosting = imgService.findAllImgHosting();
+        if (allImgHosting == null || allImgHosting.size() == 0) {
+            logger.info("查询所有图片 :{}", list);
+            return list;
+        }
+        for (ImgHosting imgHosting : allImgHosting) {
+            list.add(imgHosting.getUrl());
+        }
+
+        logger.info("查询所有图片 :{}", list);
+        return list;
     }
 }

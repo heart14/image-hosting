@@ -19,7 +19,7 @@ public class MyExceptionHandler {
 
     @ExceptionHandler({Exception.class})
     public Object exceptionHandle(Exception e) {
-        logger.error("exception :{}", e.getMessage());
+        logger.error("exception :{}", e.getMessage(),e);
         return null;
     }
 }

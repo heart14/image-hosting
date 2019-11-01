@@ -6,6 +6,7 @@ import com.example.heart.imagehosting.service.ImgHostingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,6 +44,13 @@ public class ImgHostingServiceImpl implements ImgHostingService {
 
     @Override
     public List<ImgHosting> findAllImgHosting() {
-        return null;
+        List<ImgHosting> list = new ArrayList<>();
+        Iterable<ImgHosting> imgHostings = imgHostingDao.findAll();
+        for (ImgHosting imgHosting : imgHostings) {
+            if (imgHosting.getStatus() == 1) {
+                list.add(imgHosting);
+            }
+        }
+        return list;
     }
 }
