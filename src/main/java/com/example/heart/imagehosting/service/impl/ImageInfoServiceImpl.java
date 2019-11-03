@@ -3,9 +3,18 @@ package com.example.heart.imagehosting.service.impl;
 import com.example.heart.imagehosting.dao.ImageInfoDao;
 import com.example.heart.imagehosting.entity.ImageInfo;
 import com.example.heart.imagehosting.service.ImageInfoService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,5 +54,31 @@ public class ImageInfoServiceImpl implements ImageInfoService {
     public List<ImageInfo> findAllImageInfo() {
         return imageInfoDao.findAllByStatusAndUserId(1, "heartzz1");
 
+    }
+
+    @Override
+    public Page<ImageInfo> findImageInfoPage(String imageName, Integer status, String userId, Pageable pageable) {
+
+        Specification<ImageInfo> specification = (Specification<ImageInfo>) (root, criteriaQuery, criteriaBuilder) -> {
+
+            List<Predicate> list = new ArrayList<>();
+            if (!StringUtils.isBlank(imageName)) {
+                list.add(criteriaBuilder.like(root.get("filename").as(String.class), "%" + imageName + "%"));
+            }
+            if (status != null) {
+                list.add(criteriaBuilder.equal(root.get("status").as(Integer.class), status));
+            }
+            if (!StringUtils.isBlank(userId)) {
+                list.add(criteriaBuilder.equal(root.get("userId").as(String.class), userId));
+            }
+            return criteriaBuilder.and(list.toArray(new Predicate[list.size()]));
+        };
+
+        return imageInfoDao.findAll(specification, pageable);
+    }
+
+    @Override
+    public Page<ImageInfo> findAllImageInfoPage(Pageable pageable) {
+        return imageInfoDao.findAll(pageable);
     }
 }

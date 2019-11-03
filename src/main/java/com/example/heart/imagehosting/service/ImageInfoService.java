@@ -1,6 +1,8 @@
 package com.example.heart.imagehosting.service;
 
 import com.example.heart.imagehosting.entity.ImageInfo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -50,4 +52,22 @@ public interface ImageInfoService {
      * @return
      */
     List<ImageInfo> findAllImageInfo();
+
+    /**
+     * 根据文件名 模糊分页
+     *
+     * @param imageName
+     * @param status
+     * @param userId
+     * @return
+     */
+    Page<ImageInfo> findImageInfoPage(String imageName, Integer status, String userId, Pageable pageable);
+
+    /**
+     * 无条件 分页查询
+     *
+     * @param pageable
+     * @return
+     */
+    Page<ImageInfo> findAllImageInfoPage(Pageable pageable);
 }

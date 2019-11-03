@@ -9,11 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
@@ -185,6 +189,53 @@ public class ImageController {
         }
 
         logger.info("查询所有图片 :{}", list);
+        return list;
+    }
+
+    @RequestMapping(value = "/index")
+    public ModelAndView imagePageIndex() {
+        return new ModelAndView("image");
+    }
+
+    /**
+     * 无条件 分页查询
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value = "/get/page/all")
+    public List<ImageInfo> getImagePageAll(Integer pageNum, Integer pageSize) {
+        logger.info("分页查询 :pageNum = {}, pageSize = {}", pageNum, pageSize);
+
+        Page<ImageInfo> imageInfoPage = imageInfoService.findAllImageInfoPage(PageRequest.of(pageNum, pageSize, Sort.Direction.DESC, "createTime"));
+        List<ImageInfo> list = new ArrayList<>();
+        for (ImageInfo imageInfo : imageInfoPage) {
+            list.add(imageInfo);
+        }
+        logger.info("分页查询 =>{}", list);
+        return list;
+    }
+
+    /**
+     * 根据图片名 分页 模糊查询
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param imageName
+     * @return
+     */
+    @RequestMapping(value = "/get/page")
+    public List<ImageInfo> getImagePage(Integer pageNum, Integer pageSize, String imageName) {
+        logger.info("分页查询（filename模糊查询） :pageNum = {}, pageSize = {}, imageName = {}", pageNum, pageSize, imageName);
+
+        Page<ImageInfo> imageInfoPage = imageInfoService.findImageInfoPage(imageName, 1, "heartzz1", PageRequest.of(pageNum, pageSize, Sort.Direction.DESC, "createTime"));
+        List<ImageInfo> list = new ArrayList<>();
+        Iterator<ImageInfo> iterator = imageInfoPage.iterator();
+        while (iterator.hasNext()) {
+            list.add(iterator.next());
+        }
+        logger.info("分页查询（filename模糊查询） =>{}", list);
         return list;
     }
 }

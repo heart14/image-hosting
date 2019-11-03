@@ -1,6 +1,10 @@
 package com.example.heart.imagehosting.dao;
 
 import com.example.heart.imagehosting.entity.ImageInfo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
@@ -12,7 +16,7 @@ import java.util.List;
  * @Date: 2019/10/29 15:27
  * @Version: v1.0
  */
-public interface ImageInfoDao extends PagingAndSortingRepository<ImageInfo, String> {
+public interface ImageInfoDao extends PagingAndSortingRepository<ImageInfo, String>, JpaSpecificationExecutor {
 
     /**
      * 根据图片id 查询图片
@@ -30,4 +34,5 @@ public interface ImageInfoDao extends PagingAndSortingRepository<ImageInfo, Stri
      * @return
      */
     List<ImageInfo> findAllByStatusAndUserId(Integer status, String userId);
+
 }
