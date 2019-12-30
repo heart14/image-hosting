@@ -7,7 +7,6 @@ import com.example.heart.imagehosting.utils.HttpUtils;
 import com.example.heart.imagehosting.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,8 +47,11 @@ public class ImageController {
     @Value("${CLEAR_API_URL}")
     String clearApiUrl;
 
-    @Autowired
-    private ImageInfoService imageInfoService;
+    private final ImageInfoService imageInfoService;
+
+    public ImageController(ImageInfoService imageInfoService) {
+        this.imageInfoService = imageInfoService;
+    }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public void imgUpload(@RequestParam("multipartFiles") MultipartFile[] multipartFiles) {
