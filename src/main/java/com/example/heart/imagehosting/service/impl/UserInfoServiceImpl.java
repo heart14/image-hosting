@@ -3,7 +3,6 @@ package com.example.heart.imagehosting.service.impl;
 import com.example.heart.imagehosting.dao.UserInfoDao;
 import com.example.heart.imagehosting.entity.UserInfo;
 import com.example.heart.imagehosting.service.UserInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +17,11 @@ import java.util.List;
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
 
-    @Autowired
-    private UserInfoDao userInfoDao;
+    private final UserInfoDao userInfoDao;
+
+    public UserInfoServiceImpl(UserInfoDao userInfoDao) {
+        this.userInfoDao = userInfoDao;
+    }
 
     @Override
     public UserInfo saveUserInfo(UserInfo userInfo) {

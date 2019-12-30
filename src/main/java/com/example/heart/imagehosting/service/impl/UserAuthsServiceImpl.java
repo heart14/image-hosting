@@ -3,10 +3,8 @@ package com.example.heart.imagehosting.service.impl;
 import com.example.heart.imagehosting.dao.UserAuthsDao;
 import com.example.heart.imagehosting.entity.UserAuths;
 import com.example.heart.imagehosting.service.UserAuthsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,8 +17,11 @@ import java.util.List;
 @Service
 public class UserAuthsServiceImpl implements UserAuthsService {
 
-    @Autowired
-    private UserAuthsDao userAuthsDao;
+    private final UserAuthsDao userAuthsDao;
+
+    public UserAuthsServiceImpl(UserAuthsDao userAuthsDao) {
+        this.userAuthsDao = userAuthsDao;
+    }
 
     @Override
     public UserAuths saveUserAuths(UserAuths userAuths) {
