@@ -1,8 +1,12 @@
 package com.example.heart.imagehosting.controller;
 
 import com.example.heart.imagehosting.entity.UserInfo;
+import com.example.heart.imagehosting.exception.SysResponse;
+import com.example.heart.imagehosting.sdk.smms.request.SmmsApiGetTokenReqeust;
+import com.example.heart.imagehosting.sdk.smms.response.SmmsBaseResponse;
 import com.example.heart.imagehosting.service.UserAuthsService;
 import com.example.heart.imagehosting.service.UserInfoService;
+import com.example.heart.imagehosting.utils.SysResponseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version: v1.0
  */
 @RestController
-@RequestMapping(name = "/user")
+@RequestMapping("/user")
 public class UserController {
 
     public static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -32,10 +36,23 @@ public class UserController {
         this.userInfoService = userInfoService;
     }
 
-    @RequestMapping(value = "/edit/", method = RequestMethod.POST)
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public void test() {
+        logger.info("Image-Hosting project test.");
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public void editUserInfo(@RequestBody UserInfo userInfo) {
 
         logger.info("{}", userInfo);
 
+    }
+
+    @RequestMapping(value = "/token", method = RequestMethod.GET)
+    public SysResponse getUserToken() {
+        logger.info("get token");
+        SmmsApiGetTokenReqeust smmsApiGetTokenReqeust = new SmmsApiGetTokenReqeust("yoursheart", "smmms20201818");
+        SmmsBaseResponse smmsBaseResponse = smmsApiGetTokenReqeust.doRequest();
+        return SysResponseUtils.convertSmmsResponse(smmsBaseResponse);
     }
 }

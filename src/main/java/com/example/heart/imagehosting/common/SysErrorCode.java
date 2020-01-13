@@ -40,6 +40,11 @@ public enum SysErrorCode {
     DBException(1007, "数据库异常"),
 
     /**
+     * HTTP请求异常
+     */
+    HttpException(1008, "HTTP请求异常"),
+
+    /**
      * 成功
      */
     SUCCESS(1000, "成功");

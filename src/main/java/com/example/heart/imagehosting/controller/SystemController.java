@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version: v1.0
  */
 @RestController
-@RequestMapping(name = "/system")
+@RequestMapping("/system")
 public class SystemController {
 
     public static final Logger logger = LoggerFactory.getLogger(SystemController.class);

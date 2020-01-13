@@ -3,6 +3,7 @@ package com.example.heart.imagehosting.utils;
 import com.example.heart.imagehosting.common.SysConstants;
 import com.example.heart.imagehosting.common.SysErrorCode;
 import com.example.heart.imagehosting.exception.SysResponse;
+import com.example.heart.imagehosting.sdk.smms.response.SmmsBaseResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +31,7 @@ public class SysResponseUtils {
         return sysResponse;
     }
 
-    public static SysResponse success(Integer code,String msg) {
+    public static SysResponse success(Integer code, String msg) {
         SysResponse sysResponse = new SysResponse();
         sysResponse.setState(SysConstants.STATE_SUCCESS);
         sysResponse.setErrCode(code);
@@ -48,6 +49,14 @@ public class SysResponseUtils {
         sysResponse.setErrCode(code);
         sysResponse.setErrMessage(msg);
         sysResponse.setData(object);
+        return sysResponse;
+    }
+
+    public static SysResponse convertSmmsResponse(SmmsBaseResponse smmsBaseResponse) {
+        SysResponse sysResponse = new SysResponse();
+        sysResponse.setState(smmsBaseResponse.isSuccess() ? SysConstants.STATE_SUCCESS : SysConstants.STATE_FAIL);
+        sysResponse.setErrMessage(smmsBaseResponse.getMessage());
+        sysResponse.setData(smmsBaseResponse.getData());
         return sysResponse;
     }
 }
