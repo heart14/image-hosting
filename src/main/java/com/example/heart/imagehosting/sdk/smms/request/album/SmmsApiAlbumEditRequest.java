@@ -43,7 +43,6 @@ public class SmmsApiAlbumEditRequest extends AbstractSmmsApiBaseRequest {
 
     @Override
     public Map<String, Object> apiParams() {
-
         Map<String, Object> map = new HashMap<>(2);
         map.put("add", add);
         map.put("remove", remove);

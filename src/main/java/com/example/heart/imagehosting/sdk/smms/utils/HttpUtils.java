@@ -64,8 +64,7 @@ public class HttpUtils {
                     bufferedReader.close();
                 }
             } catch (IOException e) {
-                logger.error("关闭IO流异常 : {}", e.getMessage());
-                throw new AppBizException(SysErrorCode.HttpException.getCode(), SysErrorCode.HttpException.getMsg());
+                logger.warn("关闭IO流异常 : {}", e.getMessage());
             }
         }
         logger.info("HTTP请求响应数据 : {}", respContent);
@@ -140,8 +139,7 @@ public class HttpUtils {
                     bufferedReader.close();
                 }
             } catch (IOException e) {
-                logger.error("关闭IO流异常 : {}", e.getMessage());
-                throw new AppBizException(SysErrorCode.HttpException.getCode(), SysErrorCode.HttpException.getMsg());
+                logger.warn("关闭IO流异常 : {}", e.getMessage());
             }
         }
         logger.info("HTTP请求响应数据 : {}", respContent);
@@ -156,7 +154,7 @@ public class HttpUtils {
      * @param file
      * @return
      */
-    public static String doPostImage(String apiUrl, File file) {
+    public static String doPostImage(String apiUrl, File file,String token) {
 
         //构建分隔符
         String boundary = "----WebKitFormBoundaryxAOG84Q7owWpL7ZR";
@@ -186,6 +184,7 @@ public class HttpUtils {
             httpURLConnection.setReadTimeout(30000);
 
             //设置请求头参数
+            httpURLConnection.setRequestProperty("Authorization", token);
             httpURLConnection.setRequestProperty("Connection", "Keep-Alive");
             httpURLConnection.setRequestProperty("Charset", "UTF-8");
             httpURLConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36");
@@ -251,8 +250,7 @@ public class HttpUtils {
                     bufferedReader.close();
                 }
             } catch (IOException e) {
-                logger.error("关闭IO流异常：{}", e.getMessage());
-                throw new AppBizException(SysErrorCode.HttpException.getCode(), SysErrorCode.HttpException.getMsg());
+                logger.warn("关闭IO流异常：{}", e.getMessage());
             }
         }
 

@@ -9,6 +9,7 @@ import com.example.heart.imagehosting.sdk.smms.service.SmmsApiUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * @ClassName: SmmsApiUserServiceImpl
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory;
  * @Date: 2020/1/13 17:32
  * @Version: v1.0
  */
+@Service
 public class SmmsApiUserServiceImpl implements SmmsApiUserService {
 
     private final static Logger logger = LoggerFactory.getLogger(SmmsApiUserServiceImpl.class);

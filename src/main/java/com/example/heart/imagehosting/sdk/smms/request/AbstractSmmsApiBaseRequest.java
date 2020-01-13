@@ -74,7 +74,7 @@ public abstract class AbstractSmmsApiBaseRequest implements Serializable {
      *
      * @return
      */
-    private String apiToken() {
+    public String apiToken() {
         return "zQB4WBCOTRPNtZ28REyBv062mWOTkdA8";
     }
 
