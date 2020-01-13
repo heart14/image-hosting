@@ -30,19 +30,29 @@ public enum SysErrorCode {
     RequestParamException(1005, "请求参数错误[SYNTAX]"),
 
     /**
+     * 请求参数错误
+     */
+    UnknownParamException(1006, "请求参数错误[UNKNOWN]"),
+
+    /**
+     * 请求参数错误
+     */
+    InvalidParamException(1007, "请求参数错误[INVALID]"),
+
+    /**
      * 服务异常
      */
-    ServiceException(1006, "服务异常"),
+    ServiceException(1008, "服务异常"),
 
     /**
      * 数据库操作异常
      */
-    DBException(1007, "数据库异常"),
+    DBException(1009, "数据库异常"),
 
     /**
      * HTTP请求异常
      */
-    HttpException(1008, "HTTP请求异常"),
+    HttpException(1010, "HTTP请求异常"),
 
     /**
      * 成功

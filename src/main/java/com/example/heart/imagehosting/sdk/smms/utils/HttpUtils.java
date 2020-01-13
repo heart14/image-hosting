@@ -29,6 +29,7 @@ public class HttpUtils {
      */
     public static String doGet(String apiUrl, String token) throws AppBizException {
         logger.info("HTTP GET URL :{}", apiUrl);
+        logger.info("HTTP GET TOKEN :{}", token);
 
         StringBuffer respContent = new StringBuffer();
         BufferedReader bufferedReader = null;
@@ -81,6 +82,7 @@ public class HttpUtils {
     public static String doPost(String apiUrl, String param, String token) {
         logger.info("HTTP POST URL :{}", apiUrl);
         logger.info("HTTP POST PARAMS :{}", param);
+        logger.info("HTTP POST TOKEN :{}", token);
 
         StringBuffer respContent = new StringBuffer();
         PrintWriter printWriter = null;
@@ -96,7 +98,7 @@ public class HttpUtils {
             httpURLConnection.setRequestProperty("Connection", "close");
             //httpURLConnection.setRequestProperty("Charset", "UTF-8");
             httpURLConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36");
-            if (token != null && token.trim().length() != 0 && "null".equalsIgnoreCase(token)) {
+            if (token != null && token.trim().length() != 0 &&(!"null".equalsIgnoreCase(token))) {
                 httpURLConnection.setRequestProperty("Authorization", token);
             }
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");

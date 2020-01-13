@@ -89,7 +89,6 @@ public abstract class AbstractSmmsApiBaseRequest implements Serializable {
             resp = HttpUtils.doGet(SMMS_BASE_URL + apiUri, apiToken);
             logger.info("SMMS {} RESPONSE :{}", SMMS_BASE_URL + apiUri, resp);
         } else if (SysConstants.HTTP_METHOD_POST.equalsIgnoreCase(apiMethod)) {
-            this.apiToken = "";
             resp = HttpUtils.doPost(SMMS_BASE_URL + apiUri, buildApiParams(apiParams()), apiToken);
             logger.info("SMMS {} RESPONSE :{}", SMMS_BASE_URL + apiUri, resp);
         } else {

@@ -1,12 +1,8 @@
 package com.example.heart.imagehosting.controller;
 
 import com.example.heart.imagehosting.entity.UserInfo;
-import com.example.heart.imagehosting.exception.SysResponse;
-import com.example.heart.imagehosting.sdk.smms.request.SmmsApiGetTokenReqeust;
-import com.example.heart.imagehosting.sdk.smms.response.SmmsBaseResponse;
 import com.example.heart.imagehosting.service.UserAuthsService;
 import com.example.heart.imagehosting.service.UserInfoService;
-import com.example.heart.imagehosting.utils.SysResponseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,13 +42,5 @@ public class UserController {
 
         logger.info("{}", userInfo);
 
-    }
-
-    @RequestMapping(value = "/token", method = RequestMethod.GET)
-    public SysResponse getUserToken() {
-        logger.info("get token");
-        SmmsApiGetTokenReqeust smmsApiGetTokenReqeust = new SmmsApiGetTokenReqeust("yoursheart", "smmms20201818");
-        SmmsBaseResponse smmsBaseResponse = smmsApiGetTokenReqeust.doRequest();
-        return SysResponseUtils.convertSmmsResponse(smmsBaseResponse);
     }
 }

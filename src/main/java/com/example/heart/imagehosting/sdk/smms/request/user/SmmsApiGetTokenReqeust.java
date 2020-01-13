@@ -1,4 +1,6 @@
-package com.example.heart.imagehosting.sdk.smms.request;
+package com.example.heart.imagehosting.sdk.smms.request.user;
+
+import com.example.heart.imagehosting.sdk.smms.request.AbstractSmmsApiBaseRequest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +13,8 @@ import java.util.Map;
  * @Version: v1.0
  */
 public class SmmsApiGetTokenReqeust extends AbstractSmmsApiBaseRequest {
+
+    private static final long serialVersionUID = 8774271084614911192L;
 
     /**
      * Username or Email Address
