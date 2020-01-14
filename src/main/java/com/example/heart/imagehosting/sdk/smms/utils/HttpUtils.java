@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @ClassName: HttpUtils
- * @Description: TODO
+ * @Description: sm.ms v2 api接口请求工具类
  * @Author: jayhe
  * @Date: 2020/1/8 17:30
  * @Version: v1.0
@@ -97,7 +97,7 @@ public class HttpUtils {
             httpURLConnection.setRequestProperty("Connection", "close");
             //httpURLConnection.setRequestProperty("Charset", "UTF-8");
             httpURLConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36");
-            if (token != null && token.trim().length() != 0 &&(!"null".equalsIgnoreCase(token))) {
+            if (token != null && token.trim().length() != 0 && (!"null".equalsIgnoreCase(token))) {
                 httpURLConnection.setRequestProperty("Authorization", token);
             }
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
@@ -154,7 +154,7 @@ public class HttpUtils {
      * @param file
      * @return
      */
-    public static String doPostImage(String apiUrl, File file,String token) {
+    public static String doPostImage(String apiUrl, File file, String token) {
 
         //构建分隔符
         String boundary = "----WebKitFormBoundaryxAOG84Q7owWpL7ZR";

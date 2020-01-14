@@ -1,8 +1,6 @@
 package com.example.heart.imagehosting.controller;
 
 import com.example.heart.imagehosting.entity.UserAuths;
-import com.example.heart.imagehosting.service.UserAuthsService;
-import com.example.heart.imagehosting.service.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,19 +21,8 @@ public class SystemController {
 
     public static final Logger logger = LoggerFactory.getLogger(SystemController.class);
 
-    private final UserAuthsService userAuthsService;
-
-    private final UserInfoService userInfoService;
-
-    public SystemController(UserAuthsService userAuthsService, UserInfoService userInfoService) {
-        this.userAuthsService = userAuthsService;
-        this.userInfoService = userInfoService;
-    }
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public void login(@RequestBody UserAuths userAuths) {
-
         logger.info("{}", userAuths);
-
     }
 }

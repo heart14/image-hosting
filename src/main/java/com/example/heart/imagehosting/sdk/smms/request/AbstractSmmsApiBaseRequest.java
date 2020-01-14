@@ -14,7 +14,7 @@ import java.util.UUID;
 
 /**
  * @ClassName: SmmsApiBaseRequest
- * @Description: TODO
+ * @Description: sm.ms v2 api请求
  * @Author: jayhe
  * @Date: 2020/1/8 17:42
  * @Version: v1.0

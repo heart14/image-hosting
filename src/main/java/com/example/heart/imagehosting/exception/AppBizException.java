@@ -2,12 +2,12 @@ package com.example.heart.imagehosting.exception;
 
 /**
  * @ClassName: AppBizException
- * @Description: 自定义异常类基类
+ * @Description: 自定义异常类
  * @Author: jayhe
  * @Date: 2019/11/6 10:01
  * @Version: v1.0
  */
-public class AppBizException extends RuntimeException{
+public class AppBizException extends RuntimeException {
 
     private static final long serialVersionUID = -3150856162515609057L;
 

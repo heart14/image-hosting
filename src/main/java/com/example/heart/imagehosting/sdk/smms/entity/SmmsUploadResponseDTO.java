@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * @ClassName: SmmsUploadResponseDTO
- * @Description: TODO
+ * @Description: 图片上传结果数据传输类
  * @Author: jayhe
  * @Date: 2020/1/14 10:16
  * @Version: v1.0

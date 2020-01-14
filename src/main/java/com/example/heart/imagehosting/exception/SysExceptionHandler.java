@@ -1,6 +1,7 @@
 package com.example.heart.imagehosting.exception;
 
 import com.example.heart.imagehosting.common.SysErrorCode;
+import com.example.heart.imagehosting.domain.SysResponse;
 import com.example.heart.imagehosting.utils.SysResponseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * @ClassName: SysExceptionHandler
- * @Description: TODO
+ * @Description: 系统全局异常处理器
  * @Author: jayhe
  * @Date: 2019/10/29 17:31
  * @Version: v1.0

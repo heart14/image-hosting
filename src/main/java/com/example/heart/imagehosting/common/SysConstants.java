@@ -2,7 +2,7 @@ package com.example.heart.imagehosting.common;
 
 /**
  * @ClassName: SysConstants
- * @Description: TODO
+ * @Description: 系统常量
  * @Author: jayhe
  * @Date: 2019/12/30 17:16
  * @Version: v1.0

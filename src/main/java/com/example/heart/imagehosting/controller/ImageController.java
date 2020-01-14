@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.heart.imagehosting.common.SysErrorCode;
 import com.example.heart.imagehosting.entity.ImageInfo;
 import com.example.heart.imagehosting.exception.AppBizException;
-import com.example.heart.imagehosting.exception.SysResponse;
+import com.example.heart.imagehosting.domain.SysResponse;
 import com.example.heart.imagehosting.sdk.smms.entity.SmmsUploadResponseDTO;
 import com.example.heart.imagehosting.service.ImageInfoService;
 import com.example.heart.imagehosting.service.ImageService;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,6 +61,12 @@ public class ImageController {
         this.imageService = imageService;
     }
 
+    /**
+     * 图片上传
+     *
+     * @param multipartFiles
+     * @return
+     */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public SysResponse imgUpload(@RequestParam("multipartFiles") MultipartFile[] multipartFiles) {
         logger.info("开始进行图片上传");
@@ -106,6 +111,7 @@ public class ImageController {
      *
      * @return
      */
+    @Deprecated
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public List<String> getAllImageInfo() {
 
@@ -124,11 +130,6 @@ public class ImageController {
         return list;
     }
 
-    @RequestMapping(value = "/index")
-    public ModelAndView imagePageIndex() {
-        return new ModelAndView("image");
-    }
-
     /**
      * 无条件 分页查询
      *
@@ -136,6 +137,7 @@ public class ImageController {
      * @param pageSize
      * @return
      */
+    @Deprecated
     @RequestMapping(value = "/get/page/all")
     public List<ImageInfo> getImagePageAll(Integer pageNum, Integer pageSize) {
         logger.info("分页查询 :pageNum = {}, pageSize = {}", pageNum, pageSize);
@@ -157,6 +159,7 @@ public class ImageController {
      * @param imageName
      * @return
      */
+    @Deprecated
     @RequestMapping(value = "/get/page")
     public List<ImageInfo> getImagePage(Integer pageNum, Integer pageSize, String imageName) {
         logger.info("分页查询（filename模糊查询） :pageNum = {}, pageSize = {}, imageName = {}", pageNum, pageSize, imageName);

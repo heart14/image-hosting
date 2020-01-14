@@ -2,7 +2,7 @@ package com.example.heart.imagehosting.common;
 
 /**
  * @ClassName: ErrorCodeEnums
- * @Description: TODO
+ * @Description: 错误枚举
  * @Author: jayhe
  * @Date: 2019/10/29 17:27
  * @Version: v1.0

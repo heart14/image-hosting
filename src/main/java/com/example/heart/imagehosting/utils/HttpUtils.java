@@ -9,7 +9,7 @@ import java.net.URL;
 
 /**
  * @ClassName: HttpUtils
- * @Description: TODO
+ * @Description: HTTP工具类
  * @Author: jayhe
  * @Date: 2019/10/29 15:52
  * @Version: v1.0

@@ -4,7 +4,7 @@ import java.util.UUID;
 
 /**
  * @ClassName: StringUtils
- * @Description: TODO
+ * @Description: 字符串工具类
  * @Author: jayhe
  * @Date: 2019/10/29 16:47
  * @Version: v1.0

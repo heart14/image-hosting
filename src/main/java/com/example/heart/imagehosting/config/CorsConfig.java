@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @ClassName: CorsConfig
- * @Description: TODO
+ * @Description: 跨域请求处理配置
  * @Author: jayhe
  * @Date: 2020/1/13 14:48
  * @Version: v1.0

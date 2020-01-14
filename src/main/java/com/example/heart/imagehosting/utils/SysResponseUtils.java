@@ -2,14 +2,14 @@ package com.example.heart.imagehosting.utils;
 
 import com.example.heart.imagehosting.common.SysConstants;
 import com.example.heart.imagehosting.common.SysErrorCode;
-import com.example.heart.imagehosting.exception.SysResponse;
+import com.example.heart.imagehosting.domain.SysResponse;
 import com.example.heart.imagehosting.sdk.smms.response.SmmsBaseResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @ClassName: SysResponseUtils
- * @Description: TODO
+ * @Description: 系统级响应工具类
  * @Author: jayhe
  * @Date: 2019/12/30 17:13
  * @Version: v1.0
@@ -39,7 +39,7 @@ public class SysResponseUtils {
         return sysResponse;
     }
 
-    public static SysResponse success(Integer code, String msg,Object data) {
+    public static SysResponse success(Integer code, String msg, Object data) {
         SysResponse sysResponse = new SysResponse();
         sysResponse.setState(SysConstants.STATE_SUCCESS);
         sysResponse.setErrCode(code);

@@ -1,8 +1,8 @@
-package com.example.heart.imagehosting.exception;
+package com.example.heart.imagehosting.domain;
 
 /**
  * @ClassName: SysResponse
- * @Description: TODO
+ * @Description: 系统级响应
  * @Author: jayhe
  * @Date: 2019/10/29 17:36
  * @Version: v1.0

@@ -6,7 +6,7 @@ import java.io.File;
 
 /**
  * @ClassName: SmmsApiImageService
- * @Description: TODO
+ * @Description: sm.ms v2 api接口
  * @Author: jayhe
  * @Date: 2020/1/13 17:30
  * @Version: v1.0

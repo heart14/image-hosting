@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ClassName: IpUtils
- * @Description: TODO
+ * @Description: IP工具类
  * @Author: lwf14
  * @Date: 2019/11/3 10:43
  * @Version: v1.0

@@ -4,7 +4,7 @@ import com.example.heart.imagehosting.sdk.smms.response.SmmsBaseResponse;
 
 /**
  * @ClassName: SmmsApiAlbumService
- * @Description: TODO
+ * @Description: sm.ms v2 api接口
  * @Author: jayhe
  * @Date: 2020/1/13 17:31
  * @Version: v1.0
