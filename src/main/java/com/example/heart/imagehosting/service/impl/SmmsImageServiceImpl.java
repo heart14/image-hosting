@@ -1,6 +1,7 @@
 package com.example.heart.imagehosting.service.impl;
 
 import com.example.heart.imagehosting.exception.AppBizException;
+import com.example.heart.imagehosting.sdk.smms.entity.SmmsUploadResponseDTO;
 import com.example.heart.imagehosting.sdk.smms.response.SmmsBaseResponse;
 import com.example.heart.imagehosting.sdk.smms.service.SmmsApiImageService;
 import com.example.heart.imagehosting.service.SmmsImageService;
@@ -27,8 +28,9 @@ public class SmmsImageServiceImpl implements SmmsImageService {
     private SmmsApiImageService smmsApiImageService;
 
     @Override
-    public void smmsUploadImage(File smfile) throws AppBizException {
+    public SmmsUploadResponseDTO smmsUploadImage(File smfile) throws AppBizException {
         SmmsBaseResponse smmsBaseResponse = smmsApiImageService.uploadImage(smfile);
         logger.info("图片上传 :{}", smmsBaseResponse);
+        return new SmmsUploadResponseDTO(smmsBaseResponse);
     }
 }

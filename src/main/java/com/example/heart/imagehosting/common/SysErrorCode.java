@@ -55,6 +55,11 @@ public enum SysErrorCode {
     HttpException(1010, "HTTP请求异常"),
 
     /**
+     * 图片上传异常
+     */
+    ImageUploadException(1011, "图片上传失败[CACHE ERROR]"),
+
+    /**
      * 成功
      */
     SUCCESS(1000, "成功");

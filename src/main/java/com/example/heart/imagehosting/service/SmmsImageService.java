@@ -1,6 +1,7 @@
 package com.example.heart.imagehosting.service;
 
 import com.example.heart.imagehosting.exception.AppBizException;
+import com.example.heart.imagehosting.sdk.smms.entity.SmmsUploadResponseDTO;
 
 import java.io.File;
 
@@ -13,5 +14,5 @@ import java.io.File;
  */
 public interface SmmsImageService {
 
-    void smmsUploadImage(File smfile) throws AppBizException;
+    SmmsUploadResponseDTO smmsUploadImage(File smfile) throws AppBizException;
 }

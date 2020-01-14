@@ -15,7 +15,7 @@ public class SmmsBaseResponse {
 
     private String message;
 
-    private Object data;
+    private String data;
 
     private String RequestId;
 
@@ -46,11 +46,11 @@ public class SmmsBaseResponse {
         this.message = message;
     }
 
-    public Object getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(String data) {
         this.data = data;
     }
 

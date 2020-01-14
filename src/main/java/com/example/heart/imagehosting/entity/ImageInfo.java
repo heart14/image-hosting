@@ -1,5 +1,9 @@
 package com.example.heart.imagehosting.entity;
 
+import com.example.heart.imagehosting.common.SysConstants;
+import com.example.heart.imagehosting.sdk.smms.entity.SmmsUploadResponseDTO;
+import com.example.heart.imagehosting.utils.StringUtils;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -64,6 +68,27 @@ public class ImageInfo {
     @Column(name = "update_time")
     private Date updateTime;
 
+    public ImageInfo() {
+    }
+
+    public ImageInfo(SmmsUploadResponseDTO smmsUploadResponseDTO){
+        this.id = StringUtils.getUuid();
+        this.fileId = smmsUploadResponseDTO.getFileId();
+        this.filename = smmsUploadResponseDTO.getFilename();
+        this.storename = smmsUploadResponseDTO.getStorename();
+        this.size = smmsUploadResponseDTO.getSize();
+        this.width = smmsUploadResponseDTO.getWidth();
+        this.height = smmsUploadResponseDTO.getHeight();
+        this.hash = smmsUploadResponseDTO.getHash();
+        this.path = smmsUploadResponseDTO.getPath();
+        this.deleteUrl = smmsUploadResponseDTO.getDelete();
+        this.url = smmsUploadResponseDTO.getUrl();
+        this.page = smmsUploadResponseDTO.getPage();
+        this.msg = smmsUploadResponseDTO.getMessage();
+        this.requestId = smmsUploadResponseDTO.getRequestId();
+        this.status = smmsUploadResponseDTO.getSuccess() ? SysConstants.STATUS_TRUE : SysConstants.STATUS_FALSE;
+        this.createTime = new Date();
+    }
 
     public String getId() {
         return id;

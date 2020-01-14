@@ -39,6 +39,15 @@ public class SysResponseUtils {
         return sysResponse;
     }
 
+    public static SysResponse success(Integer code, String msg,Object data) {
+        SysResponse sysResponse = new SysResponse();
+        sysResponse.setState(SysConstants.STATE_SUCCESS);
+        sysResponse.setErrCode(code);
+        sysResponse.setErrMessage(msg);
+        sysResponse.setData(data);
+        return sysResponse;
+    }
+
     public static SysResponse fail(Integer code, String msg) {
         return fail(code, msg, null);
     }
