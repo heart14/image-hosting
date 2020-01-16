@@ -17,4 +17,8 @@ public class SysConstants {
 
     public static final String HTTP_METHOD_POST = "POST";
     public static final String HTTP_METHOD_GET = "GET";
+
+    public static final String IDENTITY_TYPE_ACCOUNT = "ACCOUNT";
+    public static final String IDENTITY_TYPE_TELEPHONE = "TELEPHONE";
+    public static final String IDENTITY_TYPE_EMAIL = "EMAIL";
 }

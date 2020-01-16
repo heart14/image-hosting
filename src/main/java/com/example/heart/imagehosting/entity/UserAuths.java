@@ -1,50 +1,84 @@
 package com.example.heart.imagehosting.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.example.heart.imagehosting.utils.SnowFlake;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "USER_AUTHS")
-public class UserAuths {
+public class UserAuths implements Serializable {
+
+    private static final long serialVersionUID = 8684771121313587762L;
 
     @Id
-    private String id;
+    private Long id;
 
+    /**
+     * 用户id
+     */
     @Column(name = "user_id")
-    private String userId;
+    private long userId;
 
+    /**
+     * 登录类型[用户名|手机号|邮箱|QQ登录|微信登录|微博登录]
+     */
     @Column(name = "identity_type")
     private String identityType;
 
+    /**
+     * 登陆凭证
+     */
     @Column(name = "identifier")
     private String identifier;
 
+    /**
+     * 登录票据
+     */
     @Column(name = "credential")
     private String credential;
 
+    /**
+     * 用户状态
+     */
+    @Column(name = "user_state")
+    private Integer userState;
+
+    /**
+     * 创建时间
+     */
     @Column(name = "create_time")
     private Date createTime;
 
+    /**
+     * 更新时间
+     */
     @Column(name = "update_time")
     private Date updateTime;
 
-    public String getId() {
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "SysUserRole", joinColumns = {@JoinColumn(name = "uid")}, inverseJoinColumns = {@JoinColumn(name = "rid")})
+    private List<SysRole> roles;
+
+    public UserAuths() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getIdentityType() {
@@ -52,7 +86,7 @@ public class UserAuths {
     }
 
     public void setIdentityType(String identityType) {
-        this.identityType = identityType == null ? null : identityType.trim();
+        this.identityType = identityType;
     }
 
     public String getIdentifier() {
@@ -60,7 +94,7 @@ public class UserAuths {
     }
 
     public void setIdentifier(String identifier) {
-        this.identifier = identifier == null ? null : identifier.trim();
+        this.identifier = identifier;
     }
 
     public String getCredential() {
@@ -68,7 +102,15 @@ public class UserAuths {
     }
 
     public void setCredential(String credential) {
-        this.credential = credential == null ? null : credential.trim();
+        this.credential = credential;
+    }
+
+    public Integer getUserState() {
+        return userState;
+    }
+
+    public void setUserState(Integer userState) {
+        this.userState = userState;
     }
 
     public Date getCreateTime() {
@@ -87,16 +129,30 @@ public class UserAuths {
         this.updateTime = updateTime;
     }
 
+    public List<SysRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<SysRole> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "UserAuths{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
+                "id=" + id +
+                ", userId=" + userId +
                 ", identityType='" + identityType + '\'' +
                 ", identifier='" + identifier + '\'' +
                 ", credential='" + credential + '\'' +
+                ", userState=" + userState +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", roles=" + roles +
                 '}';
+    }
+
+    public String buildUserSalt() {
+        return this.identifier + "heart" + this.credential;
     }
 }

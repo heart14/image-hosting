@@ -4,17 +4,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "USER_INFO")
-public class UserInfo {
+public class UserInfo implements Serializable {
+
+    private static final long serialVersionUID = -6697786887912084307L;
 
     @Id
-    private String userId;
-
-    @Column(name = "user_status")
-    private Integer userStatus;
+    private Long userId;
 
     @Column(name = "nickname")
     private String nickname;
@@ -40,20 +40,12 @@ public class UserInfo {
     @Column(name = "update_time")
     private Date updateTime;
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
-
-    public Integer getUserStatus() {
-        return userStatus;
-    }
-
-    public void setUserStatus(Integer userStatus) {
-        this.userStatus = userStatus;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getNickname() {
@@ -123,8 +115,7 @@ public class UserInfo {
     @Override
     public String toString() {
         return "UserInfo{" +
-                "userId='" + userId + '\'' +
-                ", userStatus=" + userStatus +
+                "userId=" + userId +
                 ", nickname='" + nickname + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", loginIp='" + loginIp + '\'' +

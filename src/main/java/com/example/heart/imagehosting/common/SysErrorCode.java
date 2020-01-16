@@ -60,6 +60,21 @@ public enum SysErrorCode {
     ImageUploadException(1011, "图片上传失败[CACHE ERROR]"),
 
     /**
+     * 用户未认证，需要登录
+     */
+    UnAuthenticatedException(401, "未认证用户[AUTHENTICATED]"),
+
+    /**
+     * 用户无权限，需要授权
+     */
+    UnAuthorizedException(403, "未授权用户[UNAUTHORIZED]"),
+
+    /**
+     * 雪花算法异常
+     */
+    SnowFlakeException(1012, "Clock moved backwards. Refusing to generate id!"),
+
+    /**
      * 成功
      */
     SUCCESS(1000, "成功");

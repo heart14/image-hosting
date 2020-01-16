@@ -14,4 +14,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserAuthsDao extends PagingAndSortingRepository<UserAuths, String> {
 
+    UserAuths findUserAuthsByIdentifier(String identifier);
+
 }
