@@ -1,4 +1,4 @@
-package com.example.heart.shiro;
+package com.example.heart.imagehosting.shiro;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -42,14 +42,16 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/system/login", "anon");
         filterChainDefinitionMap.put("/system/reg", "anon");
         filterChainDefinitionMap.put("/system/logout", "anon");
+//        filterChainDefinitionMap.put("/system/role/save", "anon");
+//        filterChainDefinitionMap.put("/system/permission/save", "anon");
         filterChainDefinitionMap.put("/**", "authc");
 
         //配置shiro默认登录界面地址，未配置时会默认寻找login.jsp，前后端分离项目中登录界面跳转由前端进行路由控制，后台仅返回Json数据
-        shiroFilterFactoryBean.setLoginUrl("/system/unauth");
+        shiroFilterFactoryBean.setLoginUrl("/system/unauthz");
         //配置登录成功后要跳转的页面，也由前端进行路由控制
         //shiroFilterFactoryBean.setSuccessUrl("/index");
         //配置未授权页面
-        shiroFilterFactoryBean.setUnauthorizedUrl("/system/unauth");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/system/unauthc");
 
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

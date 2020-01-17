@@ -3,12 +3,17 @@ package com.example.heart.imagehosting.controller;
 import com.example.heart.imagehosting.common.SysConstants;
 import com.example.heart.imagehosting.common.SysErrorCode;
 import com.example.heart.imagehosting.domain.SysResponse;
+import com.example.heart.imagehosting.entity.SysPermission;
+import com.example.heart.imagehosting.entity.SysRole;
 import com.example.heart.imagehosting.entity.UserAuths;
+import com.example.heart.imagehosting.service.SysPermissionService;
+import com.example.heart.imagehosting.service.SysRoleService;
 import com.example.heart.imagehosting.service.UserAuthsService;
 import com.example.heart.imagehosting.utils.SnowFlake;
 import com.example.heart.imagehosting.utils.SysResponseUtils;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +49,9 @@ public class SystemController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public SysResponse login(@RequestBody UserAuths userAuths) {
         logger.info("用户登录 :{}", userAuths);
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(userAuths.getIdentifier(), userAuths.getCredential());
+        subject.login(token);
         return SysResponseUtils.success();
     }
 
@@ -58,7 +66,7 @@ public class SystemController {
     }
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
-    public SysResponse reg(){
+    public SysResponse reg() {
         logger.info("用户注册 :{}", "");
         UserAuths userAuths = new UserAuths();
         userAuths.setId(SnowFlake.nextId());
@@ -69,22 +77,58 @@ public class SystemController {
         userAuths.setUserState(SysConstants.STATUS_TRUE);
         userAuths.setCreateTime(new Date());
 
-        //密码加密存储
-        userAuths.setCredential(String.valueOf(new Md5Hash(new Md5Hash(userAuths.getCredential(), userAuths.buildUserSalt()))));
-
         UserAuths saveUserAuths = userAuthsService.saveUserAuths(userAuths);
         return SysResponseUtils.success(saveUserAuths);
     }
 
+    @Autowired
+    private SysRoleService sysRoleService;
+
+    @RequestMapping(value = "/role/save", method = RequestMethod.POST)
+    public SysResponse saveRole() {
+        SysRole sysRole = new SysRole();
+        sysRole.setId(SnowFlake.nextId());
+        sysRole.setRoleName("admin");
+        sysRole.setRoleDesc("系统管理员");
+        sysRoleService.saveSysRole(sysRole);
+        return SysResponseUtils.success();
+    }
+
+    @Autowired
+    private SysPermissionService sysPermissionService;
+
+    @RequestMapping(value = "/permission/save", method = RequestMethod.POST)
+    private SysResponse saveSysPermission() {
+        SysPermission sysPermission = new SysPermission();
+        sysPermission.setId(SnowFlake.nextId());
+        sysPermission.setParentId(0L);
+        sysPermission.setParentIds("");
+        sysPermission.setResourceType("menu");
+        sysPermission.setResourceUri("/user/edit");
+        sysPermission.setPermissionName("编辑用户");
+        sysPermission.setPermissionDetail("user:edit");
+        sysPermissionService.saveSysPermission(sysPermission);
+        return SysResponseUtils.success();
+    }
+
     /**
-     * 无权限用户操作
+     * 无权限
      *
      * @return
      */
-    @RequestMapping(value = "/unauth", method = RequestMethod.GET)
-    public SysResponse unAuth() {
-        logger.warn("用户无操作权限");
+    @RequestMapping(value = "/unauthz", method = RequestMethod.GET)
+    public SysResponse unAuthorized() {
         return SysResponseUtils.fail(SysErrorCode.UnAuthorizedException.getCode(), SysErrorCode.UnAuthorizedException.getMsg());
+    }
+
+    /**
+     * 未认证
+     *
+     * @return
+     */
+    @RequestMapping(value = "/unauthc", method = RequestMethod.GET)
+    public SysResponse unAuthenticated() {
+        return SysResponseUtils.fail(SysErrorCode.UnAuthenticatedException.getCode(), SysErrorCode.UnAuthenticatedException.getMsg());
     }
 
 }

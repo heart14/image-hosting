@@ -70,9 +70,14 @@ public enum SysErrorCode {
     UnAuthorizedException(403, "未授权用户[UNAUTHORIZED]"),
 
     /**
+     * 用户登录失败，用户名或密码错误
+     */
+    LoginFailException(1012, "登录失败，用户名或密码错误"),
+
+    /**
      * 雪花算法异常
      */
-    SnowFlakeException(1012, "Clock moved backwards. Refusing to generate id!"),
+    SnowFlakeException(1013, "Clock moved backwards. Refusing to generate id!"),
 
     /**
      * 成功

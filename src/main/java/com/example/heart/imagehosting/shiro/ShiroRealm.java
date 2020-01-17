@@ -1,4 +1,4 @@
-package com.example.heart.shiro;
+package com.example.heart.imagehosting.shiro;
 
 import com.example.heart.imagehosting.dao.UserAuthsDao;
 import com.example.heart.imagehosting.entity.SysPermission;
@@ -73,7 +73,7 @@ public class ShiroRealm extends AuthorizingRealm {
             logger.error("用户[{}]不存在", identifier);
             return null;
         }
-        logger.info("用户登录信息 => {}", userAuthsByIdentifier);
+        logger.info("用户信息 => {}", userAuthsByIdentifier);
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(identifier, userAuthsByIdentifier.getCredential(), ByteSource.Util.bytes(userAuthsByIdentifier.buildUserSalt()), getName());
         logger.info("ShiroRealm doGetAuthenticationInfo over.");
         return simpleAuthenticationInfo;

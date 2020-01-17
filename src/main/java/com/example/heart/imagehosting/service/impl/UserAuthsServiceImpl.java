@@ -3,6 +3,7 @@ package com.example.heart.imagehosting.service.impl;
 import com.example.heart.imagehosting.dao.UserAuthsDao;
 import com.example.heart.imagehosting.entity.UserAuths;
 import com.example.heart.imagehosting.service.UserAuthsService;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public class UserAuthsServiceImpl implements UserAuthsService {
 
     @Override
     public UserAuths saveUserAuths(UserAuths userAuths) {
+        //密码加密存储
+        userAuths.setCredential(String.valueOf(new Md5Hash(new Md5Hash(userAuths.getCredential(), userAuths.buildUserSalt()))));
         return userAuthsDao.save(userAuths);
     }
 

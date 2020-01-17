@@ -1,6 +1,6 @@
 package com.example.heart.imagehosting.entity;
 
-import com.example.heart.imagehosting.utils.SnowFlake;
+import org.apache.shiro.crypto.hash.Md5Hash;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -153,6 +153,6 @@ public class UserAuths implements Serializable {
     }
 
     public String buildUserSalt() {
-        return this.identifier + "heart" + this.credential;
+        return String.valueOf(new Md5Hash(this.identifier, "Heartzz1"));
     }
 }
