@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ClassName: SysFormAuthorizationFilter
- * @Description: TODO
+ * @Description: Http请求过滤器，过滤Options请求
  * @Author: jayhe
  * @Date: 2020/1/17 17:33
  * @Version: v1.0

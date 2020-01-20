@@ -2,9 +2,13 @@ package com.example.heart.imagehosting.shiro;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
+import org.crazycake.shiro.RedisSessionDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -46,12 +50,12 @@ public class ShiroConfig {
 //        filterChainDefinitionMap.put("/system/permission/save", "anon");
         filterChainDefinitionMap.put("/**", "authc");
 
-        //配置shiro默认登录界面地址，未配置时会默认寻找login.jsp，前后端分离项目中登录界面跳转由前端进行路由控制，后台仅返回Json数据
-        shiroFilterFactoryBean.setLoginUrl("/system/unauthz");
-        //配置登录成功后要跳转的页面，也由前端进行路由控制
+        //shiro默认登录界面地址，未配置时会默认寻找login.jsp，前后端分离项目中登录界面跳转由前端进行路由控制，后台仅返回Json数据
+        shiroFilterFactoryBean.setLoginUrl("/system/unauthc");
+        //登录成功后要跳转的页面，也由前端进行路由控制
         //shiroFilterFactoryBean.setSuccessUrl("/index");
-        //配置未授权页面
-        shiroFilterFactoryBean.setUnauthorizedUrl("/system/unauthc");
+        //未授权页面
+        shiroFilterFactoryBean.setUnauthorizedUrl("/system/unauthz");
 
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -67,6 +71,8 @@ public class ShiroConfig {
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(shiroRealm());
+//        securityManager.setSessionManager(sessionManager());
+//        securityManager.setCacheManager(redisCacheManager());
         return securityManager;
     }
 
@@ -96,6 +102,32 @@ public class ShiroConfig {
         hashedCredentialsMatcher.setHashIterations(2);
         return hashedCredentialsMatcher;
     }
+
+//    @Bean
+//    public SessionManager sessionManager() {
+//        ShiroSessionManager shiroSessionManager = new ShiroSessionManager();
+//        shiroSessionManager.setSessionDAO(redisSessionDAO());
+//        return shiroSessionManager;
+//    }
+//
+//    @Bean
+//    public RedisManager redisManager() {
+//        return new RedisManager();
+//    }
+//
+//    @Bean
+//    public RedisCacheManager redisCacheManager() {
+//        RedisCacheManager redisCacheManager = new RedisCacheManager();
+//        redisCacheManager.setRedisManager(redisManager());
+//        return redisCacheManager;
+//    }
+//
+//    @Bean
+//    public RedisSessionDAO redisSessionDAO() {
+//        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+//        redisSessionDAO.setRedisManager(redisManager());
+//        return redisSessionDAO;
+//    }
 
     /**
      * 开启ShiroAop注解

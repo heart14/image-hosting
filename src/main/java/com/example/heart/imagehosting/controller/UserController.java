@@ -3,7 +3,6 @@ package com.example.heart.imagehosting.controller;
 import com.example.heart.imagehosting.domain.SysResponse;
 import com.example.heart.imagehosting.service.UserInfoService;
 import com.example.heart.imagehosting.utils.SysResponseUtils;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/user")
-@RequiresAuthentication
 public class UserController {
 
     public static final Logger logger = LoggerFactory.getLogger(UserController.class);
