@@ -74,7 +74,7 @@ public class ShiroRealm extends AuthorizingRealm {
             return null;
         }
         logger.info("用户信息 => {}", userAuthsByIdentifier);
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(identifier, userAuthsByIdentifier.getCredential(), ByteSource.Util.bytes(userAuthsByIdentifier.buildUserSalt()), getName());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(identifier, userAuthsByIdentifier.getCredential(), new ShiroByteSource(userAuthsByIdentifier.buildUserSalt()), getName());
         logger.info("ShiroRealm doGetAuthenticationInfo over.");
         return simpleAuthenticationInfo;
     }

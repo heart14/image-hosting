@@ -69,8 +69,8 @@ public class ShiroConfig {
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(shiroRealm());
-//        securityManager.setSessionManager(sessionManager());
-//        securityManager.setCacheManager(redisCacheManager());
+        securityManager.setSessionManager(sessionManager());
+        securityManager.setCacheManager(redisCacheManager());
         return securityManager;
     }
 
@@ -101,31 +101,31 @@ public class ShiroConfig {
         return hashedCredentialsMatcher;
     }
 
-//    @Bean
-//    public SessionManager sessionManager() {
-//        ShiroSessionManager shiroSessionManager = new ShiroSessionManager();
-//        shiroSessionManager.setSessionDAO(redisSessionDAO());
-//        return shiroSessionManager;
-//    }
-//
-//    @Bean
-//    public RedisManager redisManager() {
-//        return new RedisManager();
-//    }
-//
-//    @Bean
-//    public RedisCacheManager redisCacheManager() {
-//        RedisCacheManager redisCacheManager = new RedisCacheManager();
-//        redisCacheManager.setRedisManager(redisManager());
-//        return redisCacheManager;
-//    }
-//
-//    @Bean
-//    public RedisSessionDAO redisSessionDAO() {
-//        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
-//        redisSessionDAO.setRedisManager(redisManager());
-//        return redisSessionDAO;
-//    }
+    @Bean
+    public SessionManager sessionManager() {
+        ShiroSessionManager shiroSessionManager = new ShiroSessionManager();
+        shiroSessionManager.setSessionDAO(redisSessionDAO());
+        return shiroSessionManager;
+    }
+
+    @Bean
+    public RedisManager redisManager() {
+        return new RedisManager();
+    }
+
+    @Bean
+    public RedisCacheManager redisCacheManager() {
+        RedisCacheManager redisCacheManager = new RedisCacheManager();
+        redisCacheManager.setRedisManager(redisManager());
+        return redisCacheManager;
+    }
+
+    @Bean
+    public RedisSessionDAO redisSessionDAO() {
+        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+        redisSessionDAO.setRedisManager(redisManager());
+        return redisSessionDAO;
+    }
 
     /**
      * 开启ShiroAop注解
