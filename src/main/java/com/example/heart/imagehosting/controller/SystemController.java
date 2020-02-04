@@ -51,12 +51,9 @@ public class SystemController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public SysResponse login(@RequestBody UserAuths userAuths, HttpServletRequest request) {
-        logger.info("用户登录 :{}", userAuths);
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(userAuths.getIdentifier(), userAuths.getCredential());
         subject.login(token);
-
-
         Collection<Object> attributeKeys = subject.getSession().getAttributeKeys();
         if (attributeKeys != null && attributeKeys.size() > 0) {
             System.out.println("Shiro Subject Session:");
@@ -69,6 +66,7 @@ public class SystemController {
                 System.out.println(subject.getSession().getLastAccessTime());
                 System.out.println(subject.getSession().getTimeout());
                 System.out.println(subject.getSession());
+                System.out.println();
             }
         }
         System.out.println("-----------");
@@ -85,6 +83,7 @@ public class SystemController {
                 System.out.println(request.getSession().getLastAccessedTime());
                 System.out.println(request.getSession().getMaxInactiveInterval());
                 System.out.println(request.getSession().getServletContext());
+                System.out.println();
             }
         }
 
@@ -97,13 +96,11 @@ public class SystemController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public void logout() {
-        logger.info("用户登出 :{}", "");
         SecurityUtils.getSubject().logout();
     }
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public SysResponse reg() {
-        logger.info("用户注册 :{}", "");
         UserAuths userAuths = new UserAuths();
         userAuths.setId(SnowFlake.nextId());
         userAuths.setUserId(SnowFlake.nextId());

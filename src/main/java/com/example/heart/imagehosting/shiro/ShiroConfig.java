@@ -46,8 +46,6 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/system/login", "anon");
         filterChainDefinitionMap.put("/system/reg", "anon");
         filterChainDefinitionMap.put("/system/logout", "anon");
-//        filterChainDefinitionMap.put("/system/role/save", "anon");
-//        filterChainDefinitionMap.put("/system/permission/save", "anon");
         filterChainDefinitionMap.put("/**", "authc");
 
         //shiro默认登录界面地址，未配置时会默认寻找login.jsp，前后端分离项目中登录界面跳转由前端进行路由控制，后台仅返回Json数据

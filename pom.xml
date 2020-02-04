@@ -19,10 +19,16 @@
     </properties>
 
     <dependencies>
-        <!--Java Web-->
+        <!--Spring Web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--Spring AOP-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
         <!--SpringDataJPA-->
