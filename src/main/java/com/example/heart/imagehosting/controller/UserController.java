@@ -1,8 +1,10 @@
 package com.example.heart.imagehosting.controller;
 
 import com.example.heart.imagehosting.domain.SysResponse;
+import com.example.heart.imagehosting.entity.UserAuths;
 import com.example.heart.imagehosting.service.UserInfoService;
 import com.example.heart.imagehosting.utils.SysResponseUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
@@ -37,7 +39,8 @@ public class UserController {
     @RequestMapping(value = "/info", method = RequestMethod.POST)
     public SysResponse findUserInfo() {
         logger.info("/user/info 需要登录才能访问");
-        return SysResponseUtils.success();
+        UserAuths user = (UserAuths) SecurityUtils.getSubject().getSession().getAttribute("user");
+        return SysResponseUtils.success(user);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.POST)
