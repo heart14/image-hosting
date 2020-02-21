@@ -3,6 +3,7 @@ package com.example.heart.imagehosting.shiro;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -110,7 +111,10 @@ public class ShiroConfig {
 
     @Bean
     public RedisManager redisManager() {
-        return new RedisManager();
+        RedisManager redisManager = new RedisManager();
+        redisManager.setHost("192.168.0.104:6379");
+        redisManager.setPassword("h1234566");
+        return redisManager;
     }
 
     @Bean
@@ -125,6 +129,15 @@ public class ShiroConfig {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
         redisSessionDAO.setRedisManager(redisManager());
         return redisSessionDAO;
+    }
+
+    /**
+     * Shiro生命周期
+     * @return
+     */
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
     }
 
     /**

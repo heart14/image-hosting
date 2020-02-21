@@ -29,7 +29,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public void removeUserInfoById(String userId) {
+    public void removeUserInfoById(long userId) {
         userInfoDao.deleteById(userId);
     }
 
@@ -39,8 +39,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserInfo findUserInfoById(String userId) {
-        return userInfoDao.findById(userId).isPresent() ? userInfoDao.findById(userId).get() : null;
+    public UserInfo findUserInfoById(long userId) {
+        return userInfoDao.findById(userId).orElse(null);
     }
 
     @Override

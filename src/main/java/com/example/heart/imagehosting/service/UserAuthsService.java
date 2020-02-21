@@ -26,7 +26,7 @@ public interface UserAuthsService {
      *
      * @param id
      */
-    void removeUserAuths(String id);
+    void removeUserAuths(long id);
 
     /**
      * 改
@@ -42,7 +42,7 @@ public interface UserAuthsService {
      * @param id
      * @return
      */
-    UserAuths findUserAuthsById(String id);
+    UserAuths findUserAuthsById(long id);
 
     /**
      * 查
@@ -50,7 +50,7 @@ public interface UserAuthsService {
      * @param userId
      * @return
      */
-    UserAuths findUserAuthsByUserId(String userId);
+    UserAuths findUserAuthsByUserId(long userId);
 
     /**
      * 查
@@ -58,5 +58,13 @@ public interface UserAuthsService {
      * @return
      */
     List<UserAuths> findAllUserAuths();
+
+    /**
+     * 查
+     *
+     * @param identifier
+     * @return
+     */
+    UserAuths findUserAuthsByIdentifier(String identifier);
 
 }

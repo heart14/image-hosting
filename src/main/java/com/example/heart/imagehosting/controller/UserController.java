@@ -1,12 +1,16 @@
 package com.example.heart.imagehosting.controller;
 
+import com.example.heart.imagehosting.common.SysConstants;
 import com.example.heart.imagehosting.domain.SysResponse;
 import com.example.heart.imagehosting.entity.UserAuths;
+import com.example.heart.imagehosting.entity.UserInfo;
 import com.example.heart.imagehosting.service.UserInfoService;
 import com.example.heart.imagehosting.utils.SysResponseUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,21 +43,54 @@ public class UserController {
     @RequestMapping(value = "/info", method = RequestMethod.POST)
     public SysResponse findUserInfo() {
         logger.info("/user/info 需要登录才能访问");
-        UserAuths user = (UserAuths) SecurityUtils.getSubject().getSession().getAttribute("user");
-        return SysResponseUtils.success(user);
+
+        Subject subject = SecurityUtils.getSubject();
+//        PrincipalCollection previousPrincipals = subject.getPreviousPrincipals();
+//        Object principal = subject.getPrincipal();
+//        PrincipalCollection principals = subject.getPrincipals();
+//
+//        System.out.println("----subject----");
+//        System.out.println("previousPrincipals :" + previousPrincipals);
+//        System.out.println("principal :" + principal);
+//        System.out.println("principals :" + principals);
+//        System.out.println("--------");
+
+        Session session = subject.getSession();
+//        Serializable id = session.getId();
+//        String host = session.getHost();
+//        Collection<Object> attributeKeys = session.getAttributeKeys();
+//        Date startTimestamp = session.getStartTimestamp();
+//        Date lastAccessTime = session.getLastAccessTime();
+//        long timeout = session.getTimeout();
+//        System.out.println("----session----");
+//        System.out.println("id :" + id);
+//        System.out.println("host :" + host);
+//        System.out.println("startTimestamp :" + startTimestamp);
+//        System.out.println("lastAccessTime :" + lastAccessTime);
+//        System.out.println("timeout :" + timeout);
+//        if (attributeKeys != null && attributeKeys.size() > 0) {
+//            for (Object attributeKey : attributeKeys) {
+//                System.out.println("attributeKey :" + attributeKey);
+//                System.out.println("session.getAttribute(attributeKey) :" + session.getAttribute(attributeKey));
+//            }
+//        }
+//        System.out.println("--------");
+
+        UserInfo userInfoById = userInfoService.findUserInfoById(((UserAuths) session.getAttribute(SysConstants.SHIRO_SUBJECT_USER_KEY)).getUserId());
+        return SysResponseUtils.success(userInfoById);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.POST)
     @RequiresRoles({"admin"})
     public SysResponse findAllUsers() {
-        logger.info("/user/all 需要管理员admin角色才能访问");
+        logger.info("拥有admin角色，可以访问/user/all");
         return SysResponseUtils.success();
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @RequiresPermissions({"user:edit"})
     public SysResponse editUser() {
-        logger.info("/user/edit 需要user:edit权限才能访问");
+        logger.info("拥有user:edit权限，可以访问/user/edit");
         return SysResponseUtils.success();
     }
 }

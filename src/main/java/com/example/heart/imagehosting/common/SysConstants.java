@@ -21,4 +21,6 @@ public class SysConstants {
     public static final String IDENTITY_TYPE_ACCOUNT = "ACCOUNT";
     public static final String IDENTITY_TYPE_TELEPHONE = "TELEPHONE";
     public static final String IDENTITY_TYPE_EMAIL = "EMAIL";
+
+    public static final String SHIRO_SUBJECT_USER_KEY = "current_user";
 }

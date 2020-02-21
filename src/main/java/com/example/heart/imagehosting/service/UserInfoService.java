@@ -26,7 +26,7 @@ public interface UserInfoService {
      *
      * @param userId
      */
-    void removeUserInfoById(String userId);
+    void removeUserInfoById(long userId);
 
     /**
      * 改
@@ -42,7 +42,7 @@ public interface UserInfoService {
      * @param userId
      * @return
      */
-    UserInfo findUserInfoById(String userId);
+    UserInfo findUserInfoById(long userId);
 
     /**
      * 查

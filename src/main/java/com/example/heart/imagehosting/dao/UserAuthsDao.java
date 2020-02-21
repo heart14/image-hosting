@@ -12,8 +12,10 @@ import org.springframework.stereotype.Repository;
  * @Version: v1.0
  */
 @Repository
-public interface UserAuthsDao extends PagingAndSortingRepository<UserAuths, String> {
+public interface UserAuthsDao extends PagingAndSortingRepository<UserAuths, Long> {
 
     UserAuths findUserAuthsByIdentifier(String identifier);
+
+    UserAuths findUserAuthsByUserId(long userId);
 
 }

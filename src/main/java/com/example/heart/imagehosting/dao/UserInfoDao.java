@@ -10,5 +10,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  * @Date: 2019/10/29 15:27
  * @Version: v1.0
  */
-public interface UserInfoDao extends PagingAndSortingRepository<UserInfo, String> {
+public interface UserInfoDao extends PagingAndSortingRepository<UserInfo, Long> {
 }

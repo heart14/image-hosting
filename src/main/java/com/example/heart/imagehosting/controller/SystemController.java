@@ -1,5 +1,6 @@
 package com.example.heart.imagehosting.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.heart.imagehosting.common.SysConstants;
 import com.example.heart.imagehosting.common.SysErrorCode;
 import com.example.heart.imagehosting.domain.SysResponse;
@@ -23,9 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.Enumeration;
 
 /**
  * @ClassName: SystemController
@@ -54,40 +54,15 @@ public class SystemController {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(userAuths.getIdentifier(), userAuths.getCredential());
         subject.login(token);
-//        Collection<Object> attributeKeys = subject.getSession().getAttributeKeys();
-//        if (attributeKeys != null && attributeKeys.size() > 0) {
-//            System.out.println("Shiro Subject Session:");
-//            for (Object attributeKey : attributeKeys) {
-//                System.out.println("key\t:" + attributeKey);
-//                System.out.println("value\t:" + subject.getSession().getAttribute(attributeKey));
-//                System.out.println(subject.getSession().getId());
-//                System.out.println(subject.getSession().getHost());
-//                System.out.println(subject.getSession().getStartTimestamp());
-//                System.out.println(subject.getSession().getLastAccessTime());
-//                System.out.println(subject.getSession().getTimeout());
-//                System.out.println(subject.getSession());
-//                System.out.println();
-//            }
-//        }
-//        System.out.println("-----------");
-//
-//        Enumeration<String> attributeNames = request.getSession().getAttributeNames();
-//        if (attributeNames != null) {
-//            System.out.println("HttpServletRequest Session:");
-//            while (attributeNames.hasMoreElements()) {
-//                String s = attributeNames.nextElement();
-//                System.out.println("key\t:" + s);
-//                System.out.println("value\t:" + request.getSession().getAttribute(s));
-//                System.out.println(request.getSession().getId());
-//                System.out.println(request.getSession().getCreationTime());
-//                System.out.println(request.getSession().getLastAccessedTime());
-//                System.out.println(request.getSession().getMaxInactiveInterval());
-//                System.out.println(request.getSession().getServletContext());
-//                System.out.println();
-//            }
-//        }
 
-        return SysResponseUtils.success();
+        UserAuths userAuthsByIdentifier = userAuthsService.findUserAuthsByIdentifier(userAuths.getIdentifier());
+        subject.getSession().setAttribute(SysConstants.SHIRO_SUBJECT_USER_KEY,userAuthsByIdentifier);
+
+        //sessionId返回给前端作为token
+        Serializable id = subject.getSession().getId();
+        JSONObject jsonObject = new JSONObject(1);
+        jsonObject.put("access_token", id);
+        return SysResponseUtils.success(jsonObject);
     }
 
     /**

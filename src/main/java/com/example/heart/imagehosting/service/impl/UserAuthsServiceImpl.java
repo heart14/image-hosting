@@ -6,6 +6,7 @@ import com.example.heart.imagehosting.service.UserAuthsService;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class UserAuthsServiceImpl implements UserAuthsService {
     }
 
     @Override
-    public void removeUserAuths(String id) {
+    public void removeUserAuths(long id) {
         userAuthsDao.deleteById(id);
     }
 
@@ -42,17 +43,27 @@ public class UserAuthsServiceImpl implements UserAuthsService {
     }
 
     @Override
-    public UserAuths findUserAuthsById(String id) {
-        return userAuthsDao.findById(id).isPresent() ? userAuthsDao.findById(id).get() : null;
+    public UserAuths findUserAuthsById(long id) {
+        return userAuthsDao.findById(id).orElse(null);
     }
 
     @Override
-    public UserAuths findUserAuthsByUserId(String userId) {
-        return null;
+    public UserAuths findUserAuthsByUserId(long userId) {
+        return userAuthsDao.findUserAuthsByUserId(userId);
     }
 
     @Override
     public List<UserAuths> findAllUserAuths() {
-        return null;
+        Iterable<UserAuths> authsIterable = userAuthsDao.findAll();
+        List<UserAuths> userAuthsList = new ArrayList<>();
+
+        authsIterable.forEach(userAuths -> userAuthsList.add(userAuths));
+        return userAuthsList;
+    }
+
+    @Override
+    public UserAuths findUserAuthsByIdentifier(String identifier) {
+        //TODO param validation
+        return userAuthsDao.findUserAuthsByIdentifier(identifier);
     }
 }
