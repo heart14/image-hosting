@@ -106,12 +106,12 @@ public class SystemController {
     private SysPermissionService sysPermissionService;
 
     @RequestMapping(value = "/permission/save", method = RequestMethod.POST)
-    private SysResponse saveSysPermission() {
+    public SysResponse saveSysPermission() {
         SysPermission sysPermission = new SysPermission();
         sysPermission.setId(SnowFlake.nextId());
         sysPermission.setParentId(0L);
         sysPermission.setParentIds("");
-        sysPermission.setResourceType("menu");
+        sysPermission.setResourceType("button");
         sysPermission.setResourceUri("/user/edit");
         sysPermission.setPermissionName("编辑用户");
         sysPermission.setPermissionDetail("user:edit");

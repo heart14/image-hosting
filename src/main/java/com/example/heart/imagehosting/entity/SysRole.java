@@ -115,8 +115,6 @@ public class SysRole implements Serializable {
                 ", roleName='" + roleName + '\'' +
                 ", roleDesc='" + roleDesc + '\'' +
                 ", roleState=" + roleState +
-                ", permissions=" + permissions +
-                ", userAuths=" + userAuths +
                 '}';
     }
 }

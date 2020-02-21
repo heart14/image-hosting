@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @ClassName: UserController
  * @Description: TODO
@@ -84,14 +86,16 @@ public class UserController {
     @RequiresRoles({"admin"})
     public SysResponse findAllUsers() {
         logger.info("拥有admin角色，可以访问/user/all");
-        return SysResponseUtils.success();
+        List<UserInfo> allUserInfo = userInfoService.findAllUserInfo();
+        return SysResponseUtils.success(allUserInfo);
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @RequiresPermissions({"user:edit"})
     public SysResponse editUser() {
         logger.info("拥有user:edit权限，可以访问/user/edit");
-        return SysResponseUtils.success();
+        List<UserInfo> allUserInfo = userInfoService.findAllUserInfo();
+        return SysResponseUtils.success(allUserInfo);
     }
 }
 

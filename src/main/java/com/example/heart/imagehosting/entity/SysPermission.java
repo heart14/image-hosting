@@ -154,7 +154,6 @@ public class SysPermission implements Serializable {
                 ", parentId=" + parentId +
                 ", parentIds='" + parentIds + '\'' +
                 ", permissionState=" + permissionState +
-                ", roles=" + roles +
                 '}';
     }
 }
