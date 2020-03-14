@@ -43,6 +43,12 @@ public class SystemController {
     @Autowired
     private UserAuthsService userAuthsService;
 
+    @Autowired
+    private SysRoleService sysRoleService;
+
+    @Autowired
+    private SysPermissionService sysPermissionService;
+
     /**
      * 用户登录接口
      *
@@ -56,7 +62,7 @@ public class SystemController {
         subject.login(token);
 
         UserAuths userAuthsByIdentifier = userAuthsService.findUserAuthsByIdentifier(userAuths.getIdentifier());
-        subject.getSession().setAttribute(SysConstants.SHIRO_SUBJECT_USER_KEY,userAuthsByIdentifier);
+        subject.getSession().setAttribute(SysConstants.SHIRO_SUBJECT_USER_KEY, userAuthsByIdentifier);
 
         //sessionId返回给前端作为token
         Serializable id = subject.getSession().getId();
@@ -68,12 +74,16 @@ public class SystemController {
     /**
      * 用户登出接口
      */
-
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public void logout() {
         SecurityUtils.getSubject().logout();
     }
 
+    /**
+     * 用户注册接口
+     *
+     * @return
+     */
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public SysResponse reg() {
         UserAuths userAuths = new UserAuths();
@@ -89,9 +99,11 @@ public class SystemController {
         return SysResponseUtils.success(saveUserAuths);
     }
 
-    @Autowired
-    private SysRoleService sysRoleService;
-
+    /**
+     * 添加角色
+     *
+     * @return
+     */
     @RequestMapping(value = "/role/save", method = RequestMethod.POST)
     public SysResponse saveRole() {
         SysRole sysRole = new SysRole();
@@ -102,9 +114,11 @@ public class SystemController {
         return SysResponseUtils.success();
     }
 
-    @Autowired
-    private SysPermissionService sysPermissionService;
-
+    /**
+     * 添加权限
+     *
+     * @return
+     */
     @RequestMapping(value = "/permission/save", method = RequestMethod.POST)
     public SysResponse saveSysPermission() {
         SysPermission sysPermission = new SysPermission();
