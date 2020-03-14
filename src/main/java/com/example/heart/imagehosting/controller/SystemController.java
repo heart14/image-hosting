@@ -3,6 +3,7 @@ package com.example.heart.imagehosting.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.heart.imagehosting.common.SysConstants;
 import com.example.heart.imagehosting.common.SysErrorCode;
+import com.example.heart.imagehosting.domain.SysRequest;
 import com.example.heart.imagehosting.domain.SysResponse;
 import com.example.heart.imagehosting.entity.SysPermission;
 import com.example.heart.imagehosting.entity.SysRole;
@@ -85,16 +86,33 @@ public class SystemController {
      * @return
      */
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
-    public SysResponse reg() {
+    public SysResponse reg(@RequestBody SysRequest sysRequest) {
+
+        //获取参数
+        String bizContent = sysRequest.getBizContent();
+        JSONObject bizParams = JSONObject.parseObject(bizContent);
+
+        String identifyType = bizParams.getString("identifyType");
+        String identifier = bizParams.getString("identifier");
+        String credential = bizParams.getString("credential");
+        String reCredential = bizParams.getString("reCredential");
+        String captchaId = bizParams.getString("captchaId");
+        String captchaCode = bizParams.getString("captchaCode");
+
+        //TODO 密码一致性校验
+        //TODO 验证码校验
+
+        //组装账号数据
         UserAuths userAuths = new UserAuths();
         userAuths.setId(SnowFlake.nextId());
         userAuths.setUserId(SnowFlake.nextId());
-        userAuths.setIdentityType(SysConstants.IDENTITY_TYPE_ACCOUNT);
-        userAuths.setIdentifier("heartzz1");
-        userAuths.setCredential("1234566");
+        userAuths.setIdentityType(identifyType);
+        userAuths.setIdentifier(identifier);
+        userAuths.setCredential(credential);
         userAuths.setUserState(SysConstants.STATUS_TRUE);
         userAuths.setCreateTime(new Date());
 
+        //保存账号数据
         UserAuths saveUserAuths = userAuthsService.saveUserAuths(userAuths);
         return SysResponseUtils.success(saveUserAuths);
     }
@@ -105,11 +123,23 @@ public class SystemController {
      * @return
      */
     @RequestMapping(value = "/role/save", method = RequestMethod.POST)
-    public SysResponse saveRole() {
+    public SysResponse saveRole(@RequestBody SysRequest sysRequest) {
+        String bizContent = sysRequest.getBizContent();
+        JSONObject bizParams = JSONObject.parseObject(bizContent);
+
+        String roleName = bizParams.getString("roleName");
+        String roleDesc = bizParams.getString("roleDesc");
+
         SysRole sysRole = new SysRole();
         sysRole.setId(SnowFlake.nextId());
-        sysRole.setRoleName("admin");
-        sysRole.setRoleDesc("系统管理员");
+        sysRole.setRoleName(roleName);
+        sysRole.setRoleDesc(roleDesc);
+//        示例
+//        SysRole sysRole = new SysRole();
+//        sysRole.setId(SnowFlake.nextId());
+//        sysRole.setRoleName("admin");
+//        sysRole.setRoleDesc("系统管理员");
+
         sysRoleService.saveSysRole(sysRole);
         return SysResponseUtils.success();
     }
@@ -120,15 +150,35 @@ public class SystemController {
      * @return
      */
     @RequestMapping(value = "/permission/save", method = RequestMethod.POST)
-    public SysResponse saveSysPermission() {
+    public SysResponse saveSysPermission(@RequestBody SysRequest sysRequest) {
+        String bizContent = sysRequest.getBizContent();
+        JSONObject bizParams = JSONObject.parseObject(bizContent);
+
+        Long parentId = bizParams.getLong("parentId");
+        String parentIds = bizParams.getString("parentIds");
+        String resourceType = bizParams.getString("resourceType");
+        String resourceUri = bizParams.getString("resourceUri");
+        String permissionName = bizParams.getString("permissionName");
+        String permissionDetail = bizParams.getString("permissionDetail");
+
         SysPermission sysPermission = new SysPermission();
         sysPermission.setId(SnowFlake.nextId());
-        sysPermission.setParentId(0L);
-        sysPermission.setParentIds("");
-        sysPermission.setResourceType("button");
-        sysPermission.setResourceUri("/user/edit");
-        sysPermission.setPermissionName("编辑用户");
-        sysPermission.setPermissionDetail("user:edit");
+        sysPermission.setParentId(parentId);
+        sysPermission.setParentIds(parentIds);
+        sysPermission.setResourceType(resourceType);
+        sysPermission.setResourceUri(resourceUri);
+        sysPermission.setPermissionName(permissionName);
+        sysPermission.setPermissionDetail(permissionDetail);
+//        示例
+//        SysPermission sysPermission = new SysPermission();
+//        sysPermission.setId(SnowFlake.nextId());
+//        sysPermission.setParentId(0L);
+//        sysPermission.setParentIds("");
+//        sysPermission.setResourceType("button");
+//        sysPermission.setResourceUri("/user/edit");
+//        sysPermission.setPermissionName("编辑用户");
+//        sysPermission.setPermissionDetail("user:edit");
+
         sysPermissionService.saveSysPermission(sysPermission);
         return SysResponseUtils.success();
     }
