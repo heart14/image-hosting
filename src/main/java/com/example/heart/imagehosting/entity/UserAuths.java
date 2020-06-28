@@ -20,7 +20,7 @@ public class UserAuths implements Serializable {
      * 用户id
      */
     @Column(name = "user_id")
-    private long userId;
+    private Long userId;
 
     /**
      * 登录类型[用户名|手机号|邮箱|QQ登录|微信登录|微博登录]
@@ -58,8 +58,8 @@ public class UserAuths implements Serializable {
     @Column(name = "update_time")
     private Date updateTime;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "SysUserRole", joinColumns = {@JoinColumn(name = "uid")}, inverseJoinColumns = {@JoinColumn(name = "rid")})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(name = "SysUserRole", joinColumns = @JoinColumn(name = "uid"), inverseJoinColumns = @JoinColumn(name = "rid"))
     private List<SysRole> roles;
 
     public UserAuths() {

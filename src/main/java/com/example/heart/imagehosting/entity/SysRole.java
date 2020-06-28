@@ -1,7 +1,5 @@
 package com.example.heart.imagehosting.entity;
 
-import com.example.heart.imagehosting.utils.SnowFlake;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -19,11 +17,14 @@ public class SysRole implements Serializable {
 
     private static final long serialVersionUID = 4788940827648935858L;
 
-    /**
-     * 角色id 主键 唯一标识
-     */
     @Id
     private Long id;
+
+    /**
+     * 角色id 唯一标识
+     */
+    @Column(name = "role_id")
+    private Long roleId;
 
     /**
      * 角色名 用于业务逻辑中识别角色
@@ -46,15 +47,14 @@ public class SysRole implements Serializable {
     /**
      * 角色-权限：多对多关系
      */
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "SysRolePermission", joinColumns = {@JoinColumn(name = "rid")}, inverseJoinColumns = {@JoinColumn(name = "pid")})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(name = "SysRolePermission", joinColumns = @JoinColumn(name = "rid"), inverseJoinColumns = @JoinColumn(name = "pid"))
     private List<SysPermission> permissions;
 
     /**
      * 角色-用户：多对多关系
      */
-    @ManyToMany
-    @JoinTable(name = "SysUserRole", joinColumns = {@JoinColumn(name = "rid")}, inverseJoinColumns = {@JoinColumn(name = "uid")})
+    @ManyToMany(mappedBy = "roles")
     private List<UserAuths> userAuths;
 
     public SysRole() {
@@ -66,6 +66,14 @@ public class SysRole implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public String getRoleName() {
@@ -112,6 +120,7 @@ public class SysRole implements Serializable {
     public String toString() {
         return "SysRole{" +
                 "id=" + id +
+                ", roleId='" + roleId + '\'' +
                 ", roleName='" + roleName + '\'' +
                 ", roleDesc='" + roleDesc + '\'' +
                 ", roleState=" + roleState +

@@ -1,7 +1,5 @@
 package com.example.heart.imagehosting.entity;
 
-import com.example.heart.imagehosting.utils.SnowFlake;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -21,6 +19,12 @@ public class SysPermission implements Serializable {
 
     @Id
     private Long id;
+
+    /**
+     * 权限id
+     */
+    @Column(name = "permission_id")
+    private Long permissionId;
 
     /**
      * 权限名 用于标识大权限
@@ -58,14 +62,16 @@ public class SysPermission implements Serializable {
     @Column(name = "parent_ids")
     private String parentIds;
 
+    /**
+     * 权限状态
+     */
     @Column(name = "permission_state")
     private Boolean permissionState = Boolean.TRUE;
 
     /**
      * 权限-角色 多对多关系
      */
-    @ManyToMany
-    @JoinTable(name = "SysRolePermission", joinColumns = {@JoinColumn(name = "pid")}, inverseJoinColumns = {@JoinColumn(name = "rid")})
+    @ManyToMany(mappedBy = "permissions")
     private List<SysRole> roles;
 
     public SysPermission() {
@@ -77,6 +83,14 @@ public class SysPermission implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getPermissionId() {
+        return permissionId;
+    }
+
+    public void setPermissionId(Long permissionId) {
+        this.permissionId = permissionId;
     }
 
     public String getPermissionName() {
@@ -147,6 +161,7 @@ public class SysPermission implements Serializable {
     public String toString() {
         return "SysPermission{" +
                 "id=" + id +
+                ", permissionId='" + permissionId + '\'' +
                 ", permissionName='" + permissionName + '\'' +
                 ", resourceType='" + resourceType + '\'' +
                 ", resourceUri='" + resourceUri + '\'' +
