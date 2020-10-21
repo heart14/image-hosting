@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * @ClassName: SmmsApiImageQueryUploadHistoryRequest
- * @Description: TODO
+ * @Description: 查询历史上传记录
  * @Author: lwf14
  * @Date: 2020/1/13 21:08
  * @Version: v1.0

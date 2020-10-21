@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * @ClassName: SmmsApiImageUploadRequest
- * @Description: TODO
+ * @Description: 上传图像到SM.MS
  * @Author: lwf14
  * @Date: 2020/1/13 21:08
  * @Version: v1.0

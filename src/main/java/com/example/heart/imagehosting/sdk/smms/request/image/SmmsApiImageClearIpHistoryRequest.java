@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * @ClassName: SmmsApiImageClearIpHistoryRequest
- * @Description: TODO
+ * @Description: 清除基于IP的临时上传历史记录
  * @Author: lwf14
  * @Date: 2020/1/13 20:59
  * @Version: v1.0

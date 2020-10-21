@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * @ClassName: SmmsApiImageQueryIpHistoryRequest
- * @Description: TODO
+ * @Description: 查询基于IP的临时上传历史
  * @Author: lwf14
  * @Date: 2020/1/13 21:04
  * @Version: v1.0
