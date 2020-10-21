@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * @ClassName: SmmsApiAlbumQueryRequest
- * @Description: TODO
+ * @Description: 获取所有相册
  * @Author: jayhe
  * @Date: 2020/1/13 18:15
  * @Version: v1.0

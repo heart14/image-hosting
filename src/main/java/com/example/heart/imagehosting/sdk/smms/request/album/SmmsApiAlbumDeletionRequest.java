@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * @ClassName: SmmsApiAlbumDeletionRequest
- * @Description: TODO
+ * @Description: 删除相册
  * @Author: jayhe
  * @Date: 2020/1/13 18:01
  * @Version: v1.0

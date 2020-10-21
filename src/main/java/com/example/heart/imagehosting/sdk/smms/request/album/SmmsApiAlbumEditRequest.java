@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * @ClassName: SmmsApiAlbumEditRequest
- * @Description: TODO
+ * @Description: 添加/删除到相册
  * @Author: jayhe
  * @Date: 2020/1/13 17:56
  * @Version: v1.0
