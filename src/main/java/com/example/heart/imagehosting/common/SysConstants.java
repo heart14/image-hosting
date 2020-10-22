@@ -23,4 +23,7 @@ public class SysConstants {
     public static final String IDENTITY_TYPE_EMAIL = "EMAIL";
 
     public static final String SHIRO_SUBJECT_USER_KEY = "current_user";
+
+    public static final Long JWT_TOKEN_TTL = 30000L;
+    public static final String JWT_TOKEN_SECRET = "heartzzzzzzzzzzzzzzzz";
 }
