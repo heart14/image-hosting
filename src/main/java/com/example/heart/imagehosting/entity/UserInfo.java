@@ -7,6 +7,9 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 用户信息实体类
+ */
 @Entity
 @Table(name = "USER_INFO")
 public class UserInfo implements Serializable {

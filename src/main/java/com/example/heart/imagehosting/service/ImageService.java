@@ -14,12 +14,4 @@ import java.io.File;
  */
 public interface ImageService {
 
-    /**
-     * 上传图片
-     *
-     * @param file
-     * @param userId
-     * @throws AppBizException
-     */
-    SmmsUploadResponseDTO uploadImage(File file, String userId) throws AppBizException;
 }

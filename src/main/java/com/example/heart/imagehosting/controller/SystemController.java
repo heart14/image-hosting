@@ -5,17 +5,10 @@ import com.example.heart.imagehosting.common.SysConstants;
 import com.example.heart.imagehosting.common.SysErrorCode;
 import com.example.heart.imagehosting.domain.SysRequest;
 import com.example.heart.imagehosting.domain.SysResponse;
-import com.example.heart.imagehosting.entity.SysPermission;
-import com.example.heart.imagehosting.entity.SysRole;
 import com.example.heart.imagehosting.entity.UserAuths;
-import com.example.heart.imagehosting.service.SysPermissionService;
-import com.example.heart.imagehosting.service.SysRoleService;
 import com.example.heart.imagehosting.service.UserAuthsService;
 import com.example.heart.imagehosting.utils.SnowFlake;
 import com.example.heart.imagehosting.utils.SysResponseUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -44,12 +36,6 @@ public class SystemController {
     @Autowired
     private UserAuthsService userAuthsService;
 
-    @Autowired
-    private SysRoleService sysRoleService;
-
-    @Autowired
-    private SysPermissionService sysPermissionService;
-
     /**
      * 用户登录接口
      *
@@ -58,18 +44,7 @@ public class SystemController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public SysResponse login(@RequestBody UserAuths userAuths, HttpServletRequest request) {
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(userAuths.getIdentifier(), userAuths.getCredential());
-        subject.login(token);
-
-        UserAuths userAuthsByIdentifier = userAuthsService.findUserAuthsByIdentifier(userAuths.getIdentifier());
-        subject.getSession().setAttribute(SysConstants.SHIRO_SUBJECT_USER_KEY, userAuthsByIdentifier);
-
-        //sessionId返回给前端作为token
-        Serializable id = subject.getSession().getId();
-        JSONObject jsonObject = new JSONObject(1);
-        jsonObject.put("access_token", id);
-        return SysResponseUtils.success(jsonObject);
+        return SysResponseUtils.success();
     }
 
     /**
@@ -77,7 +52,7 @@ public class SystemController {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public void logout() {
-        SecurityUtils.getSubject().logout();
+
     }
 
     /**
@@ -115,16 +90,6 @@ public class SystemController {
         //保存账号数据
         UserAuths saveUserAuths = userAuthsService.saveUserAuths(userAuths);
         return SysResponseUtils.success(saveUserAuths);
-    }
-
-    /**
-     * 无权限
-     *
-     * @return
-     */
-    @RequestMapping(value = "/unauthz", method = RequestMethod.GET)
-    public SysResponse unAuthorized() {
-        return SysResponseUtils.fail(SysErrorCode.UnAuthorizedException.getCode(), SysErrorCode.UnAuthorizedException.getMsg());
     }
 
     /**

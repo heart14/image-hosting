@@ -11,6 +11,9 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 图片信息实体类
+ */
 @Entity
 @Table(name = "IMAGE_INFO")
 public class ImageInfo implements Serializable {

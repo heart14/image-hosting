@@ -1,12 +1,15 @@
 package com.example.heart.imagehosting.entity;
 
-import org.apache.shiro.crypto.hash.Md5Hash;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
+/**
+ * 用户账号实体类
+ */
 @Entity
 @Table(name = "USER_AUTHS")
 public class UserAuths implements Serializable {
@@ -57,10 +60,6 @@ public class UserAuths implements Serializable {
      */
     @Column(name = "update_time")
     private Date updateTime;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "SysUserRole", joinColumns = @JoinColumn(name = "uid"), inverseJoinColumns = @JoinColumn(name = "rid"))
-    private List<SysRole> roles;
 
     public UserAuths() {
     }
@@ -129,13 +128,6 @@ public class UserAuths implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public List<SysRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<SysRole> roles) {
-        this.roles = roles;
-    }
 
     @Override
     public String toString() {
@@ -148,11 +140,10 @@ public class UserAuths implements Serializable {
                 ", userState=" + userState +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
-                ", roles=" + roles +
                 '}';
     }
 
     public String buildUserSalt() {
-        return String.valueOf(new Md5Hash(this.identifier, "Heartzz1"));
+        return this.identifier + "Heartzz1";
     }
 }

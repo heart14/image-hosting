@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @ClassName: UserInfoService
- * @Description: TODO
+ * @Description: 用户信息服务类
  * @Author: jayhe
  * @Date: 2019/10/29 15:20
  * @Version: v1.0

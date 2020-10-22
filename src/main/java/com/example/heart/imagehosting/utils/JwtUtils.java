@@ -142,7 +142,7 @@ public class JwtUtils {
         return subject.getString("userId");
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         JSONObject jsonObject = new JSONObject(3);
         jsonObject.put("userId", "94213");
@@ -171,5 +171,5 @@ public class JwtUtils {
             e.printStackTrace();
         }
 
-    }
+    }*/
 }

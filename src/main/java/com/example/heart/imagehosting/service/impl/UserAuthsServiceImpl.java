@@ -3,7 +3,7 @@ package com.example.heart.imagehosting.service.impl;
 import com.example.heart.imagehosting.dao.UserAuthsDao;
 import com.example.heart.imagehosting.entity.UserAuths;
 import com.example.heart.imagehosting.service.UserAuthsService;
-import org.apache.shiro.crypto.hash.Md5Hash;
+import com.example.heart.imagehosting.utils.MD5Utils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class UserAuthsServiceImpl implements UserAuthsService {
     @Override
     public UserAuths saveUserAuths(UserAuths userAuths) {
         //密码加密存储
-        userAuths.setCredential(String.valueOf(new Md5Hash(new Md5Hash(userAuths.getCredential(), userAuths.buildUserSalt()))));
+        userAuths.setCredential(MD5Utils.md5(userAuths.getCredential(), userAuths.buildUserSalt()));
         return userAuthsDao.save(userAuths);
     }
 
@@ -53,17 +53,17 @@ public class UserAuthsServiceImpl implements UserAuthsService {
     }
 
     @Override
+    public UserAuths findUserAuthsByIdentifier(String identifier) {
+        //TODO param validation
+        return userAuthsDao.findUserAuthsByIdentifier(identifier);
+    }
+
+    @Override
     public List<UserAuths> findAllUserAuths() {
         Iterable<UserAuths> authsIterable = userAuthsDao.findAll();
         List<UserAuths> userAuthsList = new ArrayList<>();
 
         authsIterable.forEach(userAuths -> userAuthsList.add(userAuths));
         return userAuthsList;
-    }
-
-    @Override
-    public UserAuths findUserAuthsByIdentifier(String identifier) {
-        //TODO param validation
-        return userAuthsDao.findUserAuthsByIdentifier(identifier);
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @ClassName: UserAuthsService
- * @Description: TODO
+ * @Description: 用户账号服务类
  * @Author: jayhe
  * @Date: 2019/10/29 15:03
  * @Version: v1.0
@@ -55,16 +55,16 @@ public interface UserAuthsService {
     /**
      * 查
      *
-     * @return
-     */
-    List<UserAuths> findAllUserAuths();
-
-    /**
-     * 查
-     *
      * @param identifier
      * @return
      */
     UserAuths findUserAuthsByIdentifier(String identifier);
+
+    /**
+     * 查
+     *
+     * @return
+     */
+    List<UserAuths> findAllUserAuths();
 
 }
