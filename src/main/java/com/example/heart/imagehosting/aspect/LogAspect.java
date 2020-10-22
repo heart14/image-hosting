@@ -1,6 +1,6 @@
 package com.example.heart.imagehosting.aspect;
 
-import com.example.heart.imagehosting.utils.IpUtils;
+import com.example.heart.imagehosting.utils.IPUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -43,7 +43,7 @@ public class LogAspect {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
 
-        logger.info("REQUEST FROM     =>{}", IpUtils.getIpAddr(request));
+        logger.info("REQUEST FROM     =>{}", IPUtils.getIpAddr(request));
         logger.info("REQUEST PATH     =>{}", request.getRequestURL());
         logger.info("REQUEST METHOD   =>{}", request.getMethod());
         logger.info("REQUEST RESOURCE =>{}{}{}", joinPoint.getSignature().getDeclaringTypeName(), ".", joinPoint.getSignature().getName());

@@ -6,15 +6,15 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @ClassName: IpUtils
+ * @ClassName: IPUtils
  * @Description: IP工具类
  * @Author: lwf14
  * @Date: 2019/11/3 10:43
  * @Version: v1.0
  */
-public class IpUtils {
+public class IPUtils {
 
-    private static final Logger logger = LoggerFactory.getLogger(IpUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(IPUtils.class);
 
     public static String getIpAddr(HttpServletRequest request) {
         if (request == null) {

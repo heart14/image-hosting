@@ -3,9 +3,6 @@ package com.example.heart.imagehosting.exception;
 import com.example.heart.imagehosting.common.SysErrorCode;
 import com.example.heart.imagehosting.domain.SysResponse;
 import com.example.heart.imagehosting.utils.SysResponseUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authz.UnauthenticatedException;
-import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -50,23 +47,5 @@ public class SysExceptionHandler {
         //请求入参异常，比如JSON字符串格式错误
         logger.error("HTTP REQUEST PARAMETER 异常 :{}", e.getMessage());
         return SysResponseUtils.fail(SysErrorCode.RequestParamException.getCode(), SysErrorCode.RequestParamException.getMsg());
-    }
-
-    @ExceptionHandler({UnauthenticatedException.class})
-    public SysResponse unauthenticatedExceptionHandler(UnauthenticatedException e) {
-        logger.error("用户认证异常 :{}", e.getMessage());
-        return SysResponseUtils.fail(SysErrorCode.UnAuthenticatedException.getCode(), SysErrorCode.UnAuthenticatedException.getMsg());
-    }
-
-    @ExceptionHandler({UnauthorizedException.class})
-    public SysResponse unauthorizedExceptionHandler(UnauthorizedException e) {
-        logger.error("用户授权异常 :{}", e.getMessage());
-        return SysResponseUtils.fail(SysErrorCode.UnAuthorizedException.getCode(), SysErrorCode.UnAuthorizedException.getMsg());
-    }
-
-    @ExceptionHandler({AuthenticationException.class})
-    public SysResponse authenticationExceptionHandler(AuthenticationException e) {
-        logger.error("用户登录失败 :{}", e.getMessage());
-        return SysResponseUtils.fail(SysErrorCode.LoginFailException.getCode(), SysErrorCode.LoginFailException.getMsg());
     }
 }

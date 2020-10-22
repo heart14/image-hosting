@@ -3,7 +3,6 @@ package com.example.heart.imagehosting.utils;
 import com.alibaba.fastjson.JSONObject;
 import com.example.heart.imagehosting.common.SysConstants;
 import com.example.heart.imagehosting.common.SysErrorCode;
-import com.example.heart.imagehosting.common.SysProperties;
 import com.example.heart.imagehosting.exception.AppBizException;
 import io.jsonwebtoken.*;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -16,7 +15,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @ClassName: JwtUtils
@@ -26,9 +24,9 @@ import java.util.UUID;
  * @Version: v1.0
  */
 @Component
-public class JwtUtils {
+public class JWTUtils {
 
-    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(JWTUtils.class);
 
     /**
      * 由私钥生成加密密钥
