@@ -5,6 +5,7 @@ import com.example.heart.imagehosting.common.SysConstants;
 import com.example.heart.imagehosting.common.SysErrorCode;
 import com.example.heart.imagehosting.domain.SysRequest;
 import com.example.heart.imagehosting.domain.SysResponse;
+import com.example.heart.imagehosting.domain.UserLoginVO;
 import com.example.heart.imagehosting.entity.UserAuths;
 import com.example.heart.imagehosting.service.UserAuthsService;
 import com.example.heart.imagehosting.utils.SnowFlake;
@@ -39,11 +40,12 @@ public class SystemController {
     /**
      * 用户登录接口
      *
-     * @param userAuths
+     * @param userLoginVO
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public SysResponse login(@RequestBody UserAuths userAuths, HttpServletRequest request) {
+    public SysResponse login(@RequestBody UserLoginVO userLoginVO, HttpServletRequest request) {
+        logger.info("用户登录 ：{}",userLoginVO);
         return SysResponseUtils.success();
     }
 
