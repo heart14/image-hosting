@@ -2,8 +2,10 @@ package com.example.heart.imagehosting.service.impl;
 
 import com.example.heart.imagehosting.dao.UserAuthsDao;
 import com.example.heart.imagehosting.entity.UserAuths;
+import com.example.heart.imagehosting.exception.AppBizException;
 import com.example.heart.imagehosting.service.UserAuthsService;
 import com.example.heart.imagehosting.utils.MD5Utils;
+import com.example.heart.imagehosting.utils.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,8 +29,10 @@ public class UserAuthsServiceImpl implements UserAuthsService {
 
     @Override
     public UserAuths saveUserAuths(UserAuths userAuths) {
-        //密码加密存储
-        userAuths.setCredential(MD5Utils.md5(userAuths.getCredential(), userAuths.buildUserSalt()));
+        if (StringUtils.isNotBlank(userAuths.getCredential())) {
+            //密码加密存储
+            userAuths.setCredential(MD5Utils.md5(userAuths.getCredential(), StringUtils.salt(userAuths.getIdentifier())));
+        }
         return userAuthsDao.save(userAuths);
     }
 
@@ -65,5 +69,10 @@ public class UserAuthsServiceImpl implements UserAuthsService {
 
         authsIterable.forEach(userAuths -> userAuthsList.add(userAuths));
         return userAuthsList;
+    }
+
+    @Override
+    public void login(String identifier, String credential) throws AppBizException {
+
     }
 }

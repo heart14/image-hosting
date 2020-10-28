@@ -1,6 +1,7 @@
 package com.example.heart.imagehosting.service;
 
 import com.example.heart.imagehosting.entity.UserAuths;
+import com.example.heart.imagehosting.exception.AppBizException;
 
 import java.util.List;
 
@@ -66,5 +67,7 @@ public interface UserAuthsService {
      * @return
      */
     List<UserAuths> findAllUserAuths();
+
+    void login(String identifier, String credential) throws AppBizException;
 
 }

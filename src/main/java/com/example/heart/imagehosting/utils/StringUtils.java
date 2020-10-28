@@ -15,27 +15,28 @@ import java.util.UUID;
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
+    /**
+     * 生成uuid
+     *
+     * @return
+     */
     public static String getUuid() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
     /**
-     * MD5加密
+     * 生成用户盐
      *
-     * @param source
-     * @param salt
+     * @param identifier
      * @return
      * @throws AppBizException
      */
-    public static String md5Encrypt(String source, String salt) throws AppBizException {
-        if (StringUtils.isAnyBlank(source, salt)) {
+    public static String salt(String identifier) throws AppBizException {
+        if (StringUtils.isBlank(identifier)) {
             throw new AppBizException(SysErrorCode.UnknownParamException.getCode(), SysErrorCode.UnknownParamException.getMsg());
         }
-        //使用用户盐MD5加密
-        String s1 = source + salt;
-        String encrypt = DigestUtils.md5Hex(s1).toUpperCase();
-        //二次加密
-        String s2 = encrypt + salt;
-        return DigestUtils.md5Hex(s2).toUpperCase();
+        //TODO 盐密钥从配置文件中获取
+        String saltKey = "1234566";
+        return MD5Utils.md5(identifier, saltKey);
     }
 }

@@ -142,8 +142,4 @@ public class UserAuths implements Serializable {
                 ", updateTime=" + updateTime +
                 '}';
     }
-
-    public String buildUserSalt() {
-        return this.identifier + "Heartzz1";
-    }
 }
